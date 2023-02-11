@@ -37,6 +37,7 @@ fun ComponentActivity.startActivityWithResult(
 class MainActivity : AppCompatActivity() {
 
     private var puzzleId: String? = ""
+    private var puzzleAnswer: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +53,9 @@ class MainActivity : AppCompatActivity() {
 
         startActivityWithResult(intent) { result ->
             puzzleId = result.data?.getStringExtra("puzzle_id").toString()
-            Log.d(LogTags.MAIN_ACTIVITY.toString(), "Puzzle Id is: $puzzleId")
-            displayText.text = "Puzzle Id is: $puzzleId"
+            puzzleAnswer = result.data?.getStringExtra("puzzle_answer").toString()
+            Log.d(LogTags.MAIN_ACTIVITY.toString(), "Puzzle Id is: $puzzleId and Puzzle Answer is: $puzzleAnswer")
+            displayText.text = "Puzzle Id is: $puzzleId and Puzzle Answer is: $puzzleAnswer"
         }
     }
 }
