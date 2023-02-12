@@ -7,38 +7,33 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import team.boa.paradox.databinding.ActivityWelcomeBinding
 
 
 class WelcomeActivity : AppCompatActivity() {
 
     private lateinit var database : DatabaseReference
-    private lateinit var submitButton: Button
-    private lateinit var puzzleIdInput: EditText
-    private lateinit var loader: ProgressBar
+    private lateinit var binding: ActivityWelcomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_welcome)
+        binding = ActivityWelcomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // hide title and title bar
-         supportActionBar?.hide()
+        supportActionBar?.hide()
 
-        // get submit components from view
-        submitButton  = findViewById(R.id.button_puzzle_id)
-        puzzleIdInput = findViewById(R.id.edit_text_puzzle_id)
-        loader = findViewById(R.id.loading_submit)
-
-        submitButton.setOnClickListener {
-            loader.isVisible = true // enable loading animation
-            submitButton.isClickable = false // disable button from being clicked again
+        binding.buttonPuzzleId.setOnClickListener {
+            binding.loadingSubmit.isVisible = true // enable loading animation
+            binding.buttonPuzzleId.isClickable = false // disable button from being clicked again
 
             // clean input
-            val cleanedPuzzleId = cleanPuzzleId(puzzleIdInput.text.toString())
+            val cleanedPuzzleId = cleanPuzzleId(binding.editTextPuzzleId.text.toString())
 
             if (cleanedPuzzleId.length < 3) {
-                loader.isVisible = false // disable loading animation
+                binding.loadingSubmit.isVisible = false // disable loading animation
                 Toast.makeText(this,"Error Invalid Puzzle Id", Toast.LENGTH_SHORT).show()
-                submitButton.isClickable = true // enable button to allow for retry
+                binding.buttonPuzzleId.isClickable = true // enable button to allow for retry
             }
 
             if (cleanedPuzzleId.length >= 3) {
@@ -61,13 +56,13 @@ class WelcomeActivity : AppCompatActivity() {
                 finish()
             }
             else {
-                loader.isVisible = false // disable loading animation
-                submitButton.isClickable = true // enable button to allow for retry
+                binding.loadingSubmit.isVisible = false // disable loading animation
+                binding.buttonPuzzleId.isClickable = true // enable button to allow for retry
                 Toast.makeText(this,"Puzzle does not exist", Toast.LENGTH_SHORT).show()
             }
         }.addOnFailureListener() {
-            loader.isVisible = false // disable loading animation
-            submitButton.isClickable = true // enable button to allow for retry
+            binding.loadingSubmit.isVisible = false // disable loading animation
+            binding.buttonPuzzleId.isClickable = true // enable button to allow for retry
             Toast.makeText(this,"Error could not locate Puzzle Id", Toast.LENGTH_SHORT).show()
         }
     }
