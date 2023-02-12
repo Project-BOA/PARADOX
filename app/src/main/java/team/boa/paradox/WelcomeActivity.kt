@@ -33,22 +33,23 @@ class WelcomeActivity : AppCompatActivity() {
             submitButton.isClickable = false // disable button from being clicked again
 
             // clean input
-            val cleanedInputString = cleanPuzzleId(puzzleIdInput.text.trim().toString())
+            val cleanedPuzzleId = cleanPuzzleId(puzzleIdInput.text.toString())
 
-            if (cleanedInputString.length < 3) {
+            if (cleanedPuzzleId.length < 3) {
                 loader.isVisible = false // disable loading animation
                 Toast.makeText(this,"Error Invalid Puzzle Id", Toast.LENGTH_SHORT).show()
                 submitButton.isClickable = true // enable button to allow for retry
             }
 
-            if (cleanedInputString.length >= 3) {
-                // validate puzzle_id
-                validatePuzzleId(cleanedInputString)
+            if (cleanedPuzzleId.length >= 3) {
+                // lookup puzzle_id
+                getPuzzleFromId(cleanedPuzzleId)
             }
         }
     }
 
-    private fun validatePuzzleId(puzzleId:String) {
+    // get the puzzle id in the database
+    private fun getPuzzleFromId(puzzleId:String) {
         database = FirebaseDatabase.getInstance().getReference("answers")
         database.child(puzzleId).get().addOnSuccessListener {
             if (it.exists()) {
@@ -61,20 +62,21 @@ class WelcomeActivity : AppCompatActivity() {
             }
             else {
                 loader.isVisible = false // disable loading animation
-                Toast.makeText(this,"Puzzle does not exist", Toast.LENGTH_SHORT).show()
                 submitButton.isClickable = true // enable button to allow for retry
+                Toast.makeText(this,"Puzzle does not exist", Toast.LENGTH_SHORT).show()
             }
         }.addOnFailureListener() {
             loader.isVisible = false // disable loading animation
-            Toast.makeText(this,"Error could not validate Puzzle Id", Toast.LENGTH_SHORT).show()
             submitButton.isClickable = true // enable button to allow for retry
+            Toast.makeText(this,"Error could not locate Puzzle Id", Toast.LENGTH_SHORT).show()
         }
     }
 
+    // clean a string to match puzzle id format
     private fun cleanPuzzleId(inputString: String): String {
-
-        // codes only contain uppercase characters
-        // only allow numbers and capital letters
-        return inputString.uppercase().replace("[^0-9A-Z]".toRegex(), "")
+        return inputString
+            .uppercase() // convert input to uppercase if not already
+            .replace("[^0-9A-Z ]".toRegex(), "") // only allow numbers, capital letters and spaces
+            .trim() // trim any excess spaces
     }
 }
