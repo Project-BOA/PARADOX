@@ -3,7 +3,6 @@ package team.boa.paradox
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -12,6 +11,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 import team.boa.paradox.databinding.ActivityMainBinding
+import team.boa.paradox.ui.welcome.WelcomeActivity
+import team.boa.paradox.util.LogTags
 
 
 // https://kaustubhpatange.github.io/blog/post/kotlin-activity-result/

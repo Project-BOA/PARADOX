@@ -1,4 +1,4 @@
-package team.boa.paradox
+package team.boa.paradox.ui.welcome
 
 import android.content.Intent
 import android.os.Bundle
