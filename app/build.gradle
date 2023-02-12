@@ -39,7 +39,7 @@ android {
 dependencies {
     // core dependencies
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
 
     // for using view model classes
@@ -55,9 +55,15 @@ dependencies {
     implementation 'com.google.gms:google-services:4.3.15'
     implementation platform('com.google.firebase:firebase-bom:31.0.2')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-database-ktx'
 
     // networking and json converter dependency
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.moshi:moshi-kotlin:1.9.3"
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+
+    // testing
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+
 }
