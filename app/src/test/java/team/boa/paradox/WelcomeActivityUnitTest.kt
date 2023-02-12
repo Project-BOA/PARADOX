@@ -1,6 +1,5 @@
 package team.boa.paradox
 
-import android.R.attr.targetClass
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import org.junit.Assert.*
 import org.junit.Rule
@@ -24,7 +23,7 @@ class WelcomeActivityUnitTest {
 
         // get method "cleanPuzzleId" from the class and make it accessable
         val method: Method = WelcomeActivity::class.java.getDeclaredMethod("cleanPuzzleId", String::class.java)
-        method.setAccessible(true)
+        method.isAccessible = true
         val activity = WelcomeActivity()
 
         assertEquals("HELLOABD", method.invoke(activity, "HELLOabd"))
