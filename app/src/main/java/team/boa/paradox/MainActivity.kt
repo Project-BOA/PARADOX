@@ -9,6 +9,11 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 import team.boa.paradox.databinding.ActivityMainBinding
 import team.boa.paradox.ui.welcome.WelcomeActivity
@@ -40,8 +45,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private var puzzleId: String? = ""
-    private var puzzleAnswer: String? = ""
+    private lateinit var puzzleId: String
+    private lateinit var puzzleAnswer: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // hide title and title bar
-        // supportActionBar?.hide()
+         supportActionBar?.hide()
 
         // Launch welcome activity
         val intent = Intent(this, WelcomeActivity::class.java)
@@ -58,7 +63,11 @@ class MainActivity : AppCompatActivity() {
             puzzleId = result.data?.getStringExtra("puzzle_id").toString()
             puzzleAnswer = result.data?.getStringExtra("puzzle_answer").toString()
             Log.d(LogTags.MAIN_ACTIVITY.toString(), "Puzzle Id is: $puzzleId and Puzzle Answer is: $puzzleAnswer")
-            binding.textDisplay.text = "Puzzle Id is: $puzzleId and Puzzle Answer is: $puzzleAnswer"
         }
+
+        // add navigation
+        val navView: BottomNavigationView = binding.navView
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        navView.setupWithNavController(navController)
     }
 }

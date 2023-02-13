@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">PARADOX</string>
+
+    <string name="title_profile">Profile</string>
+    <string name="title_home">Home</string>
+    <string name="title_leaderboard">Leaderboard</string>
+
     <string name="edit_text_puzzle_id">Puzzle Id</string>
     <string name="button_puzzle_code">Start Puzzle</string>
-    <string name="text_welcome">Paradox</string>
+
+    <!-- Strings related to puzzle code -->
+    <string name="text_win_message">YOU WIN</string>
 </resources>

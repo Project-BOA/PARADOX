@@ -1,13 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:layout_width="match_parent"
+    <TableLayout
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/morse_button"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:insetLeft="6dp"
+                android:insetTop="6dp"
+                android:insetRight="6dp"
+                android:insetBottom="6dp"
+                android:text="Morse"
+                android:textColor="#5E35B1" />
+
+            <Button
+                android:id="@+id/cipher_button"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:insetLeft="6dp"
+                android:insetTop="6dp"
+                android:insetRight="6dp"
+                android:insetBottom="6dp"
+                android:text="Cipher"
+                android:textColor="#5E35B1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/notes_button"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:insetLeft="6dp"
+                android:insetTop="6dp"
+                android:insetRight="6dp"
+                android:insetBottom="6dp"
+                android:text="Notes"
+                android:textColor="#5E35B1" />
+
+            <Button
+                android:id="@+id/camera_button"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:insetLeft="6dp"
+                android:insetTop="6dp"
+                android:insetRight="6dp"
+                android:insetBottom="6dp"
+                android:text="Camera"
+                android:textColor="#5E35B1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/converter_button"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:insetLeft="6dp"
+                android:insetTop="6dp"
+                android:insetRight="6dp"
+                android:insetBottom="6dp"
+                android:text="Converter"
+                android:textColor="#5E35B1" />
+
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:insetLeft="6dp"
+                android:insetTop="6dp"
+                android:insetRight="6dp"
+                android:insetBottom="6dp"
+                android:text="Submit"
+                android:textColor="#5E35B1" />
+        </TableRow>
+
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
