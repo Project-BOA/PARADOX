@@ -54,7 +54,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // hide title and title bar
-         supportActionBar?.hide()
+        // supportActionBar?.hide()
+
 
         // Launch welcome activity
         val intent = Intent(this, WelcomeActivity::class.java)
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             puzzleId = result.data?.getStringExtra("puzzle_id").toString()
             puzzleAnswer = result.data?.getStringExtra("puzzle_answer").toString()
             Log.d(LogTags.MAIN_ACTIVITY.toString(), "Puzzle Id is: $puzzleId and Puzzle Answer is: $puzzleAnswer")
+            supportActionBar?.title = "PARADOX PUZZLE ID: $puzzleId"
         }
 
         // add navigation

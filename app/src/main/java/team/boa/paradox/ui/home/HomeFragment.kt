@@ -1,7 +1,5 @@
 package team.boa.paradox.ui.home
 
-import android.R
-import android.app.FragmentTransaction
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater

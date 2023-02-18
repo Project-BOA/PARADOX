@@ -1,13 +1,21 @@
 <resources>
+    <!-- Welcome -->
     <string name="app_name">PARADOX</string>
-
-    <string name="title_profile">Profile</string>
-    <string name="title_home">Home</string>
-    <string name="title_leaderboard">Leaderboard</string>
-
     <string name="edit_text_puzzle_id">Puzzle Id</string>
     <string name="button_puzzle_code">Start Puzzle</string>
 
-    <!-- Strings related to puzzle code -->
-    <string name="text_win_message">YOU WIN</string>
+    <!-- Home-->
+    <string name="title_home">Home</string>
+
+    <!-- Leaderboard-->
+    <string name="title_leaderboard">Leaderboard</string>
+
+    <!-- Profile-->
+    <string name="title_profile">Profile</string>
+    <string name="edit_text_username_hint">Username</string>
+    <string name="edit_text_password_hint">Password</string>
+    <string name="button_login">Login</string>
+    <string name="button_register">Register</string>
+    <string name="button_logout">Logout</string>
+    <string name="edit_text_email_hint">Email</string>
 </resources>

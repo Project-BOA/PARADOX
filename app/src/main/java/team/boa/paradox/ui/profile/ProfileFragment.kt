@@ -1,32 +1,45 @@
 package team.boa.paradox.ui.profile
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import team.boa.paradox.MainActivity
 import team.boa.paradox.R
+import team.boa.paradox.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ProfileFragment()
-    }
-
-    private lateinit var viewModel: ProfileViewModel
+    private lateinit var binding: FragmentProfileBinding
+    private val viewModel: ProfileViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    ): View {
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
-        // TODO: Use the ViewModel
-    }
 
+        // launch login view if not already logged in
+        if (viewModel.isLoggedIn.value == false) {
+            parentFragmentManager.beginTransaction()
+                .add(
+                    (activity as MainActivity).findViewById<View>(R.id.nav_host_fragment_activity_main).id, LoginFragment()
+                )
+                .commit()
+        }
+
+        binding.textProfileUsername.text = viewModel.username.value
+        binding.textProfileBiography.text = viewModel.biography.value
+
+        binding.buttonLogout.setOnClickListener() {
+            viewModel.logout()
+        }
+    }
 }
