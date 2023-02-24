@@ -14,7 +14,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 import team.boa.paradox.databinding.ActivityMainBinding
-import team.boa.paradox.ui.welcome.WelcomeActivity
 import team.boa.paradox.util.LogTags
 
 

@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
-import team.boa.paradox.ui.welcome.WelcomeActivity
 import java.lang.reflect.Method
 
 

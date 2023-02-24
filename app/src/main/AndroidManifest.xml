@@ -23,7 +23,7 @@
             android:name=".ToolActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.welcome.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:exported="false" />
         <activity
             android:name=".ui.tools.CameraActivity"

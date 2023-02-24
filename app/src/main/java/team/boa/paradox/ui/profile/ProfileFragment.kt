@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentProfileBinding
+import team.boa.paradox.viewmodel.ProfileViewModel
 
 class ProfileFragment : Fragment() {
 
@@ -35,7 +36,7 @@ class ProfileFragment : Fragment() {
         binding.textProfileBiography.text = viewModel.biography.value
 
         binding.buttonLogout.setOnClickListener() {
-            viewModel.logout()
+            viewModel.setUserloggedOut()
             Navigation.findNavController(view).navigate(R.id.navigate_profile_to_login)
         }
     }

@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
+import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentRegisterBinding
+import team.boa.paradox.viewmodel.ProfileViewModel
 
 class RegisterFragment : Fragment() {
 
@@ -25,8 +28,8 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonSubmitRegister.setOnClickListener() {
-            viewModel.register(binding.editTextRegisterUsername.text.toString(), binding.editTextRegisterPassword.text.toString(), binding.editTextRegisterEmail.text.toString())
             // launch login view on success or error toast on failure
+            Navigation.findNavController(view).navigate(R.id.navigate_register_to_login)
         }
     }
 }
