@@ -9,7 +9,11 @@
         android:id="@+id/navigation_profile"
         android:name="team.boa.paradox.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/navigate_profile_to_login"
+            app:destination="@id/profile_nav_graph" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_home"
@@ -22,4 +26,30 @@
         android:name="team.boa.paradox.ui.leaderboard.LeaderboardFragment"
         android:label="@string/title_leaderboard"
         tools:layout="@layout/fragment_leaderboard" />
+
+
+    <navigation android:id="@+id/profile_nav_graph"
+        app:startDestination="@id/navigation_login">
+        <fragment
+            android:id="@+id/navigation_login"
+            android:name="team.boa.paradox.ui.profile.LoginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/fragment_login">
+            <action
+                android:id="@+id/navigate_login_to_register"
+                app:destination="@id/navigation_register" />
+            <action
+                android:id="@+id/navigate_login_to_profile"
+                app:destination="@id/navigation_profile" />
+        </fragment>
+        <fragment
+            android:id="@+id/navigation_register"
+            android:name="team.boa.paradox.ui.profile.RegisterFragment"
+            android:label="fragment_register"
+            tools:layout="@layout/fragment_register">
+            <action
+                android:id="@+id/navigate_register_to_login"
+                app:destination="@id/navigation_login" />
+        </fragment>
+    </navigation>
 </navigation>

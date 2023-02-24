@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import team.boa.paradox.MainActivity
+import androidx.navigation.Navigation
 import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentLoginBinding
-import team.boa.paradox.databinding.ActivityMainBinding
 
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var mainBinding: ActivityMainBinding
     private val viewModel: ProfileViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -31,18 +30,16 @@ class LoginFragment : Fragment() {
 
         binding.buttonLogin.setOnClickListener() {
             val success = viewModel.authenticate(binding.editTextLoginUsername.text.toString(), binding.editTextLoginPassword.text.toString())
-            // launch login view on success or error toast on failure
+
             if (success) {
-                parentFragmentManager.beginTransaction()
-                    .add(
-                        (activity as MainActivity).findViewById<View>(R.id.nav_host_fragment_activity_main).id, ProfileFragment()
-                    )
-                    .commit()
+                Navigation.findNavController(binding.root).navigate(R.id.navigate_login_to_profile)
+            } else {
+                Toast.makeText(binding.root.context, "Username or Password Incorrect", Toast.LENGTH_SHORT).show();
             }
         }
 
         binding.buttonRegister.setOnClickListener() {
-            // launch register fragment
+            Navigation.findNavController(binding.root).navigate(R.id.navigate_login_to_register)
         }
     }
 }
