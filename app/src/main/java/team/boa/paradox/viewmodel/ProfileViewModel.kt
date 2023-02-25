@@ -1,16 +1,8 @@
 package team.boa.paradox.viewmodel
 
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.prototype1.network.ApiClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import team.boa.paradox.network.profile.Profile
-import team.boa.paradox.network.profile.ProfileResponse
 
 class ProfileViewModel() : ViewModel() {
     // read and write

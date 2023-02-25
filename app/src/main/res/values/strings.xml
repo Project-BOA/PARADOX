@@ -1,11 +1,18 @@
 <resources>
     <!-- Welcome -->
     <string name="app_name">PARADOX</string>
-    <string name="edit_text_puzzle_id">Puzzle Id</string>
+    <string name="edit_text_puzzle_id">Room Id</string>
     <string name="button_puzzle_code">Start Puzzle</string>
 
     <!-- Home-->
     <string name="title_home">Home</string>
+
+    <!-- Converter-->
+    <string-array name="conversion_type">
+        <item>Binary</item>
+        <item>Octal</item>
+        <item>Hexadecimal</item>
+    </string-array>
 
     <!-- Leaderboard-->
     <string name="title_leaderboard">Leaderboard</string>

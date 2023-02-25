@@ -1,4 +1,4 @@
-package team.boa.paradox.ui.leaderboard
+package team.boa.paradox.ui.tools
 
 import android.content.Context
 import android.os.Bundle
@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import team.boa.paradox.databinding.FragmentLeaderboardBinding
+import team.boa.paradox.databinding.FragmentCipherToolBinding
 import team.boa.paradox.viewmodel.ToolViewModel
 
-class LeaderboardFragment : Fragment() {
+class SubmitToolFragment : Fragment() {
 
     private val toolViewModel: ToolViewModel by activityViewModels()
-    private lateinit var binding: FragmentLeaderboardBinding
+    private lateinit var binding: FragmentCipherToolBinding
     private lateinit var activityContext: Context
     private lateinit var navController: NavController
 
@@ -23,7 +23,7 @@ class LeaderboardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
+        binding = FragmentCipherToolBinding.inflate(inflater, container, false)
         if (container != null) {
             activityContext = container.context
         }

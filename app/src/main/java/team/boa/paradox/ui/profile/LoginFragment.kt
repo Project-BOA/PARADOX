@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
 
             val userProfile = Profile(
                 binding.editTextLoginUsername.text.toString(),
-                binding.editTextLoginUsername.text.toString()
+                binding.editTextLoginPassword.text.toString()
             )
 
             ApiClient.loginApiService.validateLogin(userProfile)

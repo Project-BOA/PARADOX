@@ -19,7 +19,20 @@
         android:id="@+id/navigation_home"
         android:name="team.boa.paradox.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/navigate_home_to_camera"
+            app:destination="@id/cameraToolFragment" />
+        <action
+            android:id="@+id/navigate_home_to_welcome"
+            app:destination="@id/welcomeFragment" />
+        <action
+            android:id="@+id/navigate_home_to_cipher"
+            app:destination="@id/cipherToolFragment" />
+        <action
+            android:id="@+id/navigate_home_to_converter"
+            app:destination="@id/converterToolFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_leaderboard"
@@ -52,4 +65,27 @@
                 app:destination="@id/navigation_login" />
         </fragment>
     </navigation>
+    <fragment
+        android:id="@+id/cameraToolFragment"
+        android:name="team.boa.paradox.ui.tools.CameraToolFragment"
+        android:label="fragment_camera_tool"
+        tools:layout="@layout/fragment_camera_tool" />
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="team.boa.paradox.ui.home.WelcomeFragment"
+        android:label="WelcomeFragment" >
+        <action
+            android:id="@+id/navigate_welcome_to_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/converterToolFragment"
+        android:name="team.boa.paradox.ui.tools.ConverterToolFragment"
+        android:label="fragment_converter_tool"
+        tools:layout="@layout/fragment_converter_tool" />
+    <fragment
+        android:id="@+id/cipherToolFragment"
+        android:name="team.boa.paradox.ui.tools.CipherToolFragment"
+        android:label="fragment_cipher_tool"
+        tools:layout="@layout/fragment_cipher_tool" />
 </navigation>
