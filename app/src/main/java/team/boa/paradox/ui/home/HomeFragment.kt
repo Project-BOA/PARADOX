@@ -1,7 +1,6 @@
 package team.boa.paradox.ui.home
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentHomeBinding
-import team.boa.paradox.viewmodel.ProfileViewModel
 import team.boa.paradox.viewmodel.ToolViewModel
 
 
@@ -54,6 +52,15 @@ class HomeFragment : Fragment() {
         }
         binding.converterButton.setOnClickListener{
             navController.navigate(R.id.navigate_home_to_converter)
+        }
+        binding.morseButton.setOnClickListener {
+            navController.navigate(R.id.navigate_home_to_morse)
+        }
+        binding.notesButton.setOnClickListener {
+            navController.navigate(R.id.navigate_home_to_notes)
+        }
+        binding.submitButton.setOnClickListener {
+            navController.navigate(R.id.navigate_home_to_submit)
         }
     }
 

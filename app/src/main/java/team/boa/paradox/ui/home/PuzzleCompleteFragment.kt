@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import team.boa.paradox.databinding.FragmentCipherToolBinding
+import team.boa.paradox.databinding.FragmentPuzzleCompleteBinding
 import team.boa.paradox.viewmodel.ToolViewModel
 
 class PuzzleCompleteFragment : Fragment() {
 
     private val toolViewModel: ToolViewModel by activityViewModels()
-    private lateinit var binding: FragmentCipherToolBinding
+    private lateinit var binding: FragmentPuzzleCompleteBinding
     private lateinit var activityContext: Context
     private lateinit var navController: NavController
 
@@ -23,10 +23,11 @@ class PuzzleCompleteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCipherToolBinding.inflate(inflater, container, false)
+        binding = FragmentPuzzleCompleteBinding.inflate(inflater, container, false)
         if (container != null) {
             activityContext = container.context
         }
+        activity?.title = "Puzzle Complete"
         return binding.root
     }
 

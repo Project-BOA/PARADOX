@@ -32,6 +32,15 @@
         <action
             android:id="@+id/navigate_home_to_converter"
             app:destination="@id/converterToolFragment" />
+        <action
+            android:id="@+id/navigate_home_to_morse"
+            app:destination="@id/morseToolFragment" />
+        <action
+            android:id="@+id/navigate_home_to_notes"
+            app:destination="@id/notesToolFragment" />
+        <action
+            android:id="@+id/navigate_home_to_submit"
+            app:destination="@id/submitToolFragment2" />
     </fragment>
 
     <fragment
@@ -90,4 +99,28 @@
         android:name="team.boa.paradox.ui.tool.CipherToolFragment"
         android:label="fragment_cipher_tool"
         tools:layout="@layout/fragment_cipher_tool" />
+    <fragment
+        android:id="@+id/morseToolFragment"
+        android:name="team.boa.paradox.ui.tool.MorseToolFragment"
+        android:label="fragment_morse_tool"
+        tools:layout="@layout/fragment_morse_tool" />
+    <fragment
+        android:id="@+id/notesToolFragment"
+        android:name="team.boa.paradox.ui.tool.NotesToolFragment"
+        android:label="fragment_notes_tool"
+        tools:layout="@layout/fragment_notes_tool" />
+    <fragment
+        android:id="@+id/puzzleCompleteFragment"
+        android:name="team.boa.paradox.ui.home.PuzzleCompleteFragment"
+        android:label="fragment_puzzle_complete"
+        tools:layout="@layout/fragment_puzzle_complete" />
+    <fragment
+        android:id="@+id/submitToolFragment2"
+        android:name="team.boa.paradox.ui.tool.SubmitToolFragment"
+        android:label="fragment_submit_tool"
+        tools:layout="@layout/fragment_submit_tool" >
+        <action
+            android:id="@+id/navigate_submit_to_complete"
+            app:destination="@id/puzzleCompleteFragment" />
+    </fragment>
 </navigation>

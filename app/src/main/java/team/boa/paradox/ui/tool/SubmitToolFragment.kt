@@ -9,13 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import team.boa.paradox.databinding.FragmentCipherToolBinding
+import team.boa.paradox.R
+import team.boa.paradox.databinding.FragmentSubmitToolBinding
 import team.boa.paradox.viewmodel.ToolViewModel
 
 class SubmitToolFragment : Fragment() {
 
     private val toolViewModel: ToolViewModel by activityViewModels()
-    private lateinit var binding: FragmentCipherToolBinding
+    private lateinit var binding: FragmentSubmitToolBinding
     private lateinit var activityContext: Context
     private lateinit var navController: NavController
 
@@ -23,15 +24,20 @@ class SubmitToolFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCipherToolBinding.inflate(inflater, container, false)
+        binding = FragmentSubmitToolBinding.inflate(inflater, container, false)
         if (container != null) {
             activityContext = container.context
         }
+        activity?.title = "Submit Answer"
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(binding.root)
+
+        binding.submitButton.setOnClickListener {
+            navController.navigate(R.id.navigate_submit_to_complete)
+        }
     }
 }
