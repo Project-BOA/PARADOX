@@ -67,7 +67,7 @@
     </navigation>
     <fragment
         android:id="@+id/cameraToolFragment"
-        android:name="team.boa.paradox.ui.tools.CameraToolFragment"
+        android:name="team.boa.paradox.ui.tool.CameraToolFragment"
         android:label="fragment_camera_tool"
         tools:layout="@layout/fragment_camera_tool" />
     <fragment
@@ -80,12 +80,12 @@
     </fragment>
     <fragment
         android:id="@+id/converterToolFragment"
-        android:name="team.boa.paradox.ui.tools.ConverterToolFragment"
+        android:name="team.boa.paradox.ui.tool.ConverterToolFragment"
         android:label="fragment_converter_tool"
         tools:layout="@layout/fragment_converter_tool" />
     <fragment
         android:id="@+id/cipherToolFragment"
-        android:name="team.boa.paradox.ui.tools.CipherToolFragment"
+        android:name="team.boa.paradox.ui.tool.CipherToolFragment"
         android:label="fragment_cipher_tool"
         tools:layout="@layout/fragment_cipher_tool" />
 </navigation>

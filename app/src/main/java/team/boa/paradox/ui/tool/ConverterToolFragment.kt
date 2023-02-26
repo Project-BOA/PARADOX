@@ -1,4 +1,4 @@
-package team.boa.paradox.ui.tools
+package team.boa.paradox.ui.tool
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import team.boa.paradox.R
-import team.boa.paradox.databinding.FragmentCipherToolBinding
 import team.boa.paradox.databinding.FragmentConverterToolBinding
 import team.boa.paradox.viewmodel.ToolViewModel
 
@@ -74,7 +73,7 @@ class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun binToString(binary:String): String {
         val sb = StringBuilder()
 
-        for (bin in binary.split(" ")) {
+        for (bin in binary.trim().split(" ")) {
             try {
                 sb.append(Integer.parseInt(bin, 2).toChar())
             } catch (e: NumberFormatException) {
@@ -88,7 +87,7 @@ class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun octToString(octal:String): String {
         val sb = StringBuilder()
 
-        for (oct in octal.split(" ")) {
+        for (oct in octal.trim().split(" ")) {
             try {
                 sb.append(Integer.parseInt(oct, 8).toChar())
             } catch (e: NumberFormatException) {
@@ -102,9 +101,9 @@ class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun hexToString(hexadecimal:String): String{
         val sb = StringBuilder()
 
-        for (hex in hexadecimal.split(" ")) {
+        for (hex in hexadecimal.trim().split(" ")) {
             try {
-                sb.append(Integer.decode(hex).toChar())
+                sb.append(Integer.parseInt(hex, 16).toChar())
             } catch (e: NumberFormatException) {
                 return "Not a Hexadecimal Number"
             }
@@ -115,7 +114,7 @@ class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-        if (binding.option.getItemAtPosition(p2).toString() == "Hex") {
+        if (binding.option.getItemAtPosition(p2).toString() == "Hexadecimal") {
             binding.converterButtons.visibility = View.VISIBLE
         }
         else {

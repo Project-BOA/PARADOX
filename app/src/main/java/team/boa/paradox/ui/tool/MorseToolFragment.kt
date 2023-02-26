@@ -1,4 +1,4 @@
-package team.boa.paradox.ui.tools
+package team.boa.paradox.ui.tool
 
 import android.content.Context
 import android.os.Bundle
@@ -12,7 +12,7 @@ import androidx.navigation.Navigation
 import team.boa.paradox.databinding.FragmentCipherToolBinding
 import team.boa.paradox.viewmodel.ToolViewModel
 
-class SubmitToolFragment : Fragment() {
+class MorseToolFragment : Fragment() {
 
     private val toolViewModel: ToolViewModel by activityViewModels()
     private lateinit var binding: FragmentCipherToolBinding

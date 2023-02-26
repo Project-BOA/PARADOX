@@ -4,26 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment">
-
-
-    <Button
-        android:id="@+id/button_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="180dp"
-        android:text="@string/button_logout"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+    tools:context=".SubmitActivity">
 
     <TextView
-        android:id="@+id/text_profile"
+        android:id="@+id/text_profile5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -38,27 +22,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_profile_username"
+    <Button
+        android:id="@+id/submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:textSize="24sp"
+        android:layout_marginBottom="200dp"
+        android:text="Submit"
+        android:textColor="#5E35B1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/ans_code"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="120dp"
+        android:ems="10"
+        android:hint="Enter your answer here"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/submit_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_profile" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/text_profile_biography"
+        android:id="@+id/resultView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/ans_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_profile_username" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/text_profile5"
+        app:layout_constraintVertical_bias="0.493" />
 </androidx.constraintlayout.widget.ConstraintLayout>

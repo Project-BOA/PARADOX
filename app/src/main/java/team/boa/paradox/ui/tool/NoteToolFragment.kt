@@ -1,4 +1,4 @@
-package team.boa.paradox.ui.tools
+package team.boa.paradox.ui.tool
 
 import android.content.Context
 import android.os.Bundle

@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.tools.CipherToolFragment">
+    tools:context=".ui.tool.CipherToolFragment">
 
     <EditText
         android:id="@+id/number_push"
         android:layout_width="100dp"
         android:layout_height="48dp"
         android:ems="10"
+        android:hint="Key"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/output_text"
         app:layout_constraintEnd_toEndOf="parent"

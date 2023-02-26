@@ -1,4 +1,4 @@
-package team.boa.paradox.ui.tools
+package team.boa.paradox.ui.tool
 
 import android.content.Context
 import android.os.Bundle
@@ -12,7 +12,7 @@ import androidx.navigation.Navigation
 import team.boa.paradox.databinding.FragmentCipherToolBinding
 import team.boa.paradox.viewmodel.ToolViewModel
 
-class MorseToolFragment : Fragment() {
+class CipherToolFragment : Fragment() {
 
     private val toolViewModel: ToolViewModel by activityViewModels()
     private lateinit var binding: FragmentCipherToolBinding
@@ -33,5 +33,28 @@ class MorseToolFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(binding.root)
+        binding.decode.setOnClickListener {
+            binding.outputText.text = pushAlphabet(
+                binding.inputText.text.toString(),
+                binding.numberPush.text.toString().toInt()
+            )
+        }
+    }
+
+    val ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+
+    //out = (x-n)%26
+    private fun pushAlphabet(text: String, s:Int): String {
+        val sb = StringBuilder()
+
+        for(ch in text.lowercase()) {
+            val pos = ALPHABET.indexOf(ch)
+            var newPos = (pos - s) % 26
+            if (newPos < 0) {
+                newPos += ALPHABET.length
+            }
+            sb.append(ALPHABET[newPos])
+        }
+        return sb.toString().uppercase()
     }
 }

@@ -10,14 +10,15 @@
         android:id="@+id/text_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#5E35B1"
         android:textSize="60sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/edit_text_puzzle_id"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +26,7 @@
         android:id="@+id/edit_text_puzzle_id"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="332dp"
+        android:layout_marginTop="160dp"
         android:autofillHints=""
         android:hint="@string/edit_text_puzzle_id"
         android:inputType="textCapCharacters"
@@ -38,11 +39,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/text_welcome" />
 
     <Button
         android:id="@+id/button_puzzle_id"
-        android:layout_width="178dp"
+        android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_gravity="start"
         android:text="@string/button_puzzle_code"
