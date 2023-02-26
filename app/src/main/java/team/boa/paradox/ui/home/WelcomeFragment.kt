@@ -33,6 +33,7 @@ class WelcomeFragment : Fragment() {
         if (container != null) {
             activityContext = container.context
         }
+        activity?.title = "Join Room"
         return binding.root
     }
 

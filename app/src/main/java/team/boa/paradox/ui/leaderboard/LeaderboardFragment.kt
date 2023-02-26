@@ -27,6 +27,7 @@ class LeaderboardFragment : Fragment() {
         if (container != null) {
             activityContext = container.context
         }
+        activity?.title = "Leaderboard"
         return binding.root
     }
 

@@ -21,6 +21,7 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        activity?.title = "Register"
         return binding.root
     }
 

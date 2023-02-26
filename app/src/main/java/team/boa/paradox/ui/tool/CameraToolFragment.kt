@@ -29,6 +29,7 @@ class CameraToolFragment : Fragment() {
         if (container != null) {
             activityContext = container.context
         }
+        activity?.title = "Camera"
         return binding.root
     }
 

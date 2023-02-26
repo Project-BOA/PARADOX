@@ -1,8 +1,8 @@
 <resources>
     <!-- Welcome -->
     <string name="app_name">PARADOX</string>
-    <string name="edit_text_puzzle_id">Room Id</string>
-    <string name="button_puzzle_code">Start Puzzle</string>
+    <string name="edit_text_puzzle_id">Room ID</string>
+    <string name="button_puzzle_code">Join Room</string>
 
     <!-- Home-->
     <string name="title_home">Home</string>

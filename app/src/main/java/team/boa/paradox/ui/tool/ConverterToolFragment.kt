@@ -29,6 +29,7 @@ class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
         if (container != null) {
             activityContext = container.context
         }
+        activity?.title = "Converter"
         return binding.root
     }
 

@@ -31,6 +31,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+        activity?.title = "Login or Register"
         return binding.root
     }
 

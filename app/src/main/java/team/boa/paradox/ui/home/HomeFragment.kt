@@ -32,6 +32,7 @@ class HomeFragment : Fragment() {
         if (container != null) {
             activityContext = container.context
         }
+        activity?.title = "Home"
         return binding.root
     }
 

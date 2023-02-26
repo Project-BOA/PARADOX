@@ -27,6 +27,7 @@ class CipherToolFragment : Fragment() {
         if (container != null) {
             activityContext = container.context
         }
+        activity?.title = "Cipher"
         return binding.root
     }
 
