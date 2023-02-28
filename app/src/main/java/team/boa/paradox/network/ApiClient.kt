@@ -24,11 +24,11 @@ object ApiClient{
     }
 
     // Profile Api
-    val loginApiService: LoginAPIService by lazy{
+    val loginApiService: LoginAPIService by lazy {
         retrofit.create(LoginAPIService::class.java)
     }
 
-    val registerAPIService: RegisterAPIService by lazy{
+    val registerAPIService: RegisterAPIService by lazy {
         retrofit.create(RegisterAPIService::class.java)
     }
 }

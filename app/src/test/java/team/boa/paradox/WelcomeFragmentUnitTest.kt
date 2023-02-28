@@ -22,7 +22,7 @@ class WelcomeFragmentUnitTest {
     @Test
     fun cleanPuzzleId_isCorrect() {
 
-        // get method "cleanPuzzleId" from the class and make it accessable
+        // get method "cleanPuzzleId" from the class and make it accessible
         val method: Method = WelcomeFragment::class.java.getDeclaredMethod("cleanPuzzleId", String::class.java)
         method.isAccessible = true
         val fragment = WelcomeFragment()

@@ -16,6 +16,18 @@ data class Profile (
     val password: String
 )
 
+data class RegisterProfile (
+
+    @Json(name = "username")
+    val username: String,
+
+    @Json(name = "password")
+    val password: String,
+
+    @Json(name = "biography")
+    val biography: String
+)
+
 
 data class ProfileResponse (
 
@@ -40,5 +52,5 @@ interface RegisterAPIService {
     // tell server to get profile
     @Headers("Content-type: application/json")
     @POST("profile/register")
-    fun validateRegister(@Body profile: Profile): Call<ProfileResponse>
+    fun validateRegister(@Body registerProfile: RegisterProfile): Call<ProfileResponse>
 }
