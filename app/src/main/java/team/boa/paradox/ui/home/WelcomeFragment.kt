@@ -12,9 +12,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.example.prototype1.network.ApiClient
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import team.boa.paradox.network.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,13 +20,11 @@ import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentWelcomeBinding
 import team.boa.paradox.network.JoinRoom
 import team.boa.paradox.network.JoinRoomResponse
-import team.boa.paradox.network.LoginProfileResponse
 import team.boa.paradox.viewmodel.ProfileViewModel
 import team.boa.paradox.viewmodel.ToolViewModel
 
 class WelcomeFragment : Fragment() {
 
-    private lateinit var database : DatabaseReference
     private lateinit var binding: FragmentWelcomeBinding
     private lateinit var activityContext: Context
     private lateinit var navController: NavController
@@ -53,26 +49,6 @@ class WelcomeFragment : Fragment() {
             .uppercase() // convert input to uppercase if not already
             .replace("[^0-9A-Z ]".toRegex(), "") // only allow numbers, capital letters and spaces
             .trim() // trim any excess spaces
-    }
-
-    // get the puzzle id in the database
-    private fun getRoomFromID(roomId:String) {
-        database = FirebaseDatabase.getInstance().getReference("room")
-        database.child(roomId).get().addOnSuccessListener {
-            if (it.exists()) {
-                toolViewModel.addUserToRoom(roomId, 0)
-                navController.navigate(R.id.navigate_welcome_to_home)
-            }
-            else {
-                binding.loadingSubmit.isVisible = false // disable loading animation
-                binding.buttonPuzzleId.isClickable = true // enable button to allow for retry
-                Toast.makeText(activityContext,"Puzzle does not exist", Toast.LENGTH_SHORT).show()
-            }
-        }.addOnFailureListener() {
-            binding.loadingSubmit.isVisible = false // disable loading animation
-            binding.buttonPuzzleId.isClickable = true // enable button to allow for retry
-            Toast.makeText(activityContext,"Error could not locate Puzzle Id", Toast.LENGTH_SHORT).show()
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

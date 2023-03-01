@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
-import com.example.prototype1.network.ApiClient
+import team.boa.paradox.network.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

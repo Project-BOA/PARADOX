@@ -6,20 +6,11 @@ import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
+// Join a Room API
+
 data class JoinRoom (
     @Json(name = "username")
     val username: String,
-
-    @Json(name = "roomID")
-    val roomID: String
-)
-
-data class SubmitRoom (
-    @Json(name = "username")
-    val username: String,
-
-    @Json(name = "answer")
-    val answer: String,
 
     @Json(name = "roomID")
     val roomID: String
@@ -35,6 +26,26 @@ data class JoinRoomResponse (
 )
 
 
+interface JoinRoomAPIService {
+    @Headers("Content-type: application/json")
+    @POST("room/join")
+    fun joinRoom(@Body room: JoinRoom): Call<JoinRoomResponse>
+}
+
+// Submit to Room API
+
+data class SubmitRoom (
+    @Json(name = "username")
+    val username: String,
+
+    @Json(name = "answer")
+    val answer: String,
+
+    @Json(name = "roomID")
+    val roomID: String
+)
+
+
 data class SubmitRoomRoomResponse (
     @Json(name = "status")
     val status: String,
@@ -46,14 +57,9 @@ data class SubmitRoomRoomResponse (
     val puzzleID: String
 )
 
+
 interface SubmitRoomAPIService {
     @Headers("Content-type: application/json")
     @POST("room/submit")
     fun submitRoom(@Body room: SubmitRoom): Call<SubmitRoomRoomResponse>
-}
-
-interface JoinRoomAPIService {
-    @Headers("Content-type: application/json")
-    @POST("room/join")
-    fun joinRoom(@Body room: JoinRoom): Call<JoinRoomResponse>
 }
