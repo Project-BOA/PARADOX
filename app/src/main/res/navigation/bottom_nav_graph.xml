@@ -41,6 +41,9 @@
         <action
             android:id="@+id/navigate_home_to_submit"
             app:destination="@id/submitToolFragment2" />
+        <action
+            android:id="@+id/navigate_home_to_login"
+            app:destination="@id/navigation_profile" />
     </fragment>
 
     <fragment

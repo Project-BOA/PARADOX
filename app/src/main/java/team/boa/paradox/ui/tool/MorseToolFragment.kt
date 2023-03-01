@@ -56,7 +56,7 @@ class MorseToolFragment : Fragment() {
         binding.dashButton.setOnClickListener { addText("-") }
 
         binding.backspaceButton.setOnClickListener {
-            val str = binding.inText.text.toString();
+            val str = binding.inText.text.toString()
             if (str.isNotEmpty()) {
                 binding.inText.text = str.substring(0, str.length - 1)
             }
@@ -71,7 +71,7 @@ class MorseToolFragment : Fragment() {
 
     private fun addText(textToAdd: String) {
         if (!binding.inText.text.isEmpty()) {
-            binding.inText.text = binding.inText.text.toString() + textToAdd;
+            binding.inText.text = binding.inText.text.toString() + textToAdd
         }
     }
 }

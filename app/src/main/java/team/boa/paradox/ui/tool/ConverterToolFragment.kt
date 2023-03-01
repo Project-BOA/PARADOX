@@ -82,7 +82,7 @@ class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         }
 
-        return sb.toString();
+        return sb.toString()
     }
 
     private fun octToString(octal:String): String {
@@ -96,7 +96,7 @@ class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         }
 
-        return sb.toString();
+        return sb.toString()
     }
 
     private fun hexToString(hexadecimal:String): String{
@@ -110,7 +110,7 @@ class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         }
 
-        return sb.toString();
+        return sb.toString()
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -124,6 +124,5 @@ class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
-        ;
     }
 }

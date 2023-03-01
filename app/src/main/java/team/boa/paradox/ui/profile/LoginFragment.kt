@@ -17,8 +17,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentLoginBinding
-import team.boa.paradox.network.LoginProfile
-import team.boa.paradox.network.LoginProfileResponse
+import team.boa.paradox.network.Profile
+import team.boa.paradox.network.ProfileResponse
 import team.boa.paradox.viewmodel.ProfileViewModel
 
 
@@ -51,45 +51,47 @@ class LoginFragment : Fragment() {
             binding.loadingLogin.isVisible = true
             if (usernameInput.isNotEmpty() && passwordInput.isNotEmpty()) {
 
-                val userLoginProfile = LoginProfile(
+                val userLoginProfile = Profile (
                     usernameInput,
-                    passwordInput
+                    passwordInput,
+                    null
                 )
 
-                ApiClient.loginApiService.login(userLoginProfile)
-                    .enqueue(object : Callback<LoginProfileResponse> {
+                // call login api giving the user login with response handler object
+                ApiClient.profileAPIService.login(userLoginProfile).enqueue (
+                object : Callback<ProfileResponse> {
 
-
-                        override fun onResponse(
-                            call: Call<LoginProfileResponse>,
-                            response: Response<LoginProfileResponse>
-                        ) {
-                            if (response.isSuccessful) {
-                                Log.e("login: $userLoginProfile", response.body().toString())
-                                viewModel.setUserLoggedIn(
-                                    userLoginProfile.username,
-                                    "",
-                                    response.body()?.biography ?: "No Biography"
-                                )
-                                Navigation.findNavController(binding.root)
-                                    .navigate(R.id.navigate_login_to_profile)
-                            } else {
-                                binding.buttonLogin.isClickable = true
-                                Toast.makeText(
-                                    binding.root.context,
-                                    response.errorBody().toString(),
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                Log.d("login: $userLoginProfile", response.errorBody().toString())
-                            }
-                            binding.loadingLogin.isVisible = false
+                    override fun onResponse(
+                        call: Call<ProfileResponse>,
+                        response: Response<ProfileResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            Log.e("login: $userLoginProfile", response.body().toString())
+                            viewModel.setUserLoggedIn(
+                                userLoginProfile.username,
+                                "",
+                                response.body()?.biography ?: "No Biography"
+                            )
+                            Navigation.findNavController(binding.root)
+                                .navigate(R.id.navigate_login_to_profile)
+                        } else {
+                            binding.buttonLogin.isClickable = true
+                            Toast.makeText(
+                                activityContext,
+                                response.errorBody().toString(),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            Log.d("login: $userLoginProfile", response.errorBody().toString())
                         }
+                        binding.loadingLogin.isVisible = false
+                    }
 
 
-                        override fun onFailure(call: Call<LoginProfileResponse>, t: Throwable) {
-                            Log.e("login: $userLoginProfile", "" + t.message)
-                        }
-                    })
+                    override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+                        Log.e("login: $userLoginProfile", "" + t.message)
+                    }
+                }
+            )
             } else {
                 Toast.makeText(activityContext, "Input required", Toast.LENGTH_LONG).show()
                 binding.buttonLogin.isClickable = true

@@ -3,29 +3,26 @@ package team.boa.paradox.ui.profile
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import team.boa.paradox.network.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentRegisterBinding
-import team.boa.paradox.network.RegisterProfile
-import team.boa.paradox.network.RegisterProfileResponse
-import team.boa.paradox.viewmodel.ProfileViewModel
+import team.boa.paradox.network.ApiClient
+import team.boa.paradox.network.Profile
+import team.boa.paradox.network.ProfileResponse
 
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var activityContext: Context
-    private val viewModel: ProfileViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +39,7 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSubmitRegister.setOnClickListener() {
+        binding.buttonSubmitRegister.setOnClickListener {
 
             binding.loadingRegister.isVisible = true
             binding.buttonSubmitRegister.isClickable = false
@@ -52,14 +49,14 @@ class RegisterFragment : Fragment() {
             val biography =  binding.editTextRegisterBiography.text?.trim().toString()
 
             if(usernameInput.isNotEmpty() && passwordInput.isNotEmpty() && biography.isNotEmpty()) {
-                val userRegister = RegisterProfile(usernameInput, passwordInput, biography)
+                val userRegister = Profile(usernameInput, passwordInput, biography)
 
-                ApiClient.registerProfileAPIService.register(userRegister)
-                    .enqueue(object : Callback<RegisterProfileResponse> {
+                ApiClient.profileAPIService.register(userRegister)
+                    .enqueue(object : Callback<ProfileResponse> {
 
                         override fun onResponse(
-                            call: Call<RegisterProfileResponse>,
-                            response: Response<RegisterProfileResponse>
+                            call: Call<ProfileResponse>,
+                            response: Response<ProfileResponse>
                         ) {
                             Toast.makeText(activityContext, "Register: " + (response.body()?.status ?: response.errorBody()?.string() ?: "null"), Toast.LENGTH_LONG).show()
                             if (response.isSuccessful) {
@@ -72,7 +69,7 @@ class RegisterFragment : Fragment() {
                             binding.loadingRegister.isVisible = false
                         }
 
-                        override fun onFailure(call: Call<RegisterProfileResponse>, t: Throwable) {
+                        override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
                             Log.e("register: $userRegister", ""+t.message)
                         }
                     })

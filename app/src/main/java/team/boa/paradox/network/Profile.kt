@@ -6,17 +6,14 @@ import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
-
-data class LoginProfile (
-
-    @Json(name = "username")
-    val username: String,
-
-    @Json(name = "password")
-    val password: String
-)
-
-data class RegisterProfile (
+/**
+ * Profile data class to hold request
+ *
+ * @property username the users username
+ * @property password the users password
+ * @property biography the users biography NOTE: Only necessary on registering
+ */
+data class Profile (
 
     @Json(name = "username")
     val username: String,
@@ -25,11 +22,16 @@ data class RegisterProfile (
     val password: String,
 
     @Json(name = "biography")
-    val biography: String
+    val biography: String?
 )
 
-
-data class LoginProfileResponse (
+/**
+ * Profile response data class to hold repsonse
+ *
+ * @property status Provides the status of the response
+ * @property biography Only exists with login response
+ */
+data class ProfileResponse (
 
     @Json(name = "status")
     val status: String,
@@ -38,23 +40,19 @@ data class LoginProfileResponse (
     val biography: String?
 )
 
-data class RegisterProfileResponse (
-    @Json(name = "status")
-    val status: String
-)
-
-
-interface LoginProfileAPIService {
-    // tell server to get profile
+/**
+ * Profile Application Programming Interface Service
+ *
+ * Interface defining the functions for interacting with the profile API
+ */
+interface ProfileAPIService {
+    // where to send the login request
     @Headers("Content-type: application/json")
     @POST("profile/login")
-    fun login(@Body loginProfile: LoginProfile): Call<LoginProfileResponse>
-}
+    fun login(@Body loginProfile: Profile): Call<ProfileResponse>
 
-
-interface RegisterProfileAPIService {
-    // tell server to register profile
+    // where to send the register request
     @Headers("Content-type: application/json")
     @POST("profile/register")
-    fun register(@Body registerProfile: RegisterProfile): Call<RegisterProfileResponse>
+    fun register(@Body registerProfile: Profile): Call<ProfileResponse>
 }

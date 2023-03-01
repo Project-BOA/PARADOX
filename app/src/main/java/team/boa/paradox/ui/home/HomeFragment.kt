@@ -11,6 +11,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentHomeBinding
+import team.boa.paradox.network.Profile
+import team.boa.paradox.viewmodel.ProfileViewModel
 import team.boa.paradox.viewmodel.ToolViewModel
 
 
@@ -18,6 +20,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val toolViewModel: ToolViewModel by activityViewModels()
+    private val profileViewModel: ProfileViewModel by activityViewModels()
     private lateinit var activityContext: Context
     private lateinit var navController: NavController
 
@@ -39,6 +42,10 @@ class HomeFragment : Fragment() {
         navController = Navigation.findNavController(binding.root)
 
         // launch login view if not already logged in
+        //if (profileViewModel.isLoggedIn.value == false) {
+          //  navController.navigate(R.id.navigate_home_to_login)
+        //}
+
         if (toolViewModel.isInRoom.value == false) {
             navController.navigate(R.id.navigate_home_to_welcome)
         }

@@ -36,7 +36,7 @@ class ProfileFragment : Fragment() {
         binding.textProfileUsername.text = viewModel.username.value
         binding.textProfileBiography.text = viewModel.biography.value
 
-        binding.buttonLogout.setOnClickListener() {
+        binding.buttonLogout.setOnClickListener {
             viewModel.setUserloggedOut()
             Navigation.findNavController(view).navigate(R.id.navigate_profile_to_login)
         }

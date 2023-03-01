@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ProfileViewModel() : ViewModel() {
+class ProfileViewModel : ViewModel() {
     // read and write
     private var _username = MutableLiveData<String>()
     private var _email = MutableLiveData<String>()

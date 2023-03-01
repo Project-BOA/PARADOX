@@ -18,8 +18,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentWelcomeBinding
-import team.boa.paradox.network.JoinRoom
-import team.boa.paradox.network.JoinRoomResponse
+import team.boa.paradox.network.RoomResponse
+import team.boa.paradox.network.Room
 import team.boa.paradox.viewmodel.ProfileViewModel
 import team.boa.paradox.viewmodel.ToolViewModel
 
@@ -47,13 +47,26 @@ class WelcomeFragment : Fragment() {
     private fun cleanRoomID(inputString: String): String {
         return inputString
             .uppercase() // convert input to uppercase if not already
-            .replace("[^0-9A-Z ]".toRegex(), "") // only allow numbers, capital letters and spaces
+            .replace("[^\\dA-Z]".toRegex(), "") // only allow numbers, capital letters and spaces
             .trim() // trim any excess spaces
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(binding.root)
+
+        // check user is signed in before showing
+        binding.editTextPuzzleId.isVisible = false
+        binding.buttonPuzzleId.isVisible = false
+
+        // show if user is logged in
+        if (profileViewModel.isLoggedIn.value == true) {
+            binding.editTextPuzzleId.isVisible = true
+            binding.buttonPuzzleId.isVisible = true
+        } else {
+            binding.textViewMessage.text = "Please sign in first"
+            binding.textViewMessage.isVisible = true
+        }
 
         binding.buttonPuzzleId.setOnClickListener {
             binding.loadingSubmit.isVisible = true // enable loading animation
@@ -64,17 +77,14 @@ class WelcomeFragment : Fragment() {
 
             if (cleanedRoomID.length == 5) {
 
-                // lookup puzzle_id
-                // getRoomFromID(cleanedPuzzleId)
+                val userRoom = Room(profileViewModel.username.value.toString(), cleanedRoomID, null)
 
-                val userRoom = JoinRoom(profileViewModel.username.value.toString(), cleanedRoomID)
-
-                ApiClient.joinRoomAPIService.joinRoom(userRoom)
-                    .enqueue(object : Callback<JoinRoomResponse> {
+                ApiClient.roomAPIService.join(userRoom)
+                    .enqueue(object : Callback<RoomResponse> {
 
                         override fun onResponse(
-                            call: Call<JoinRoomResponse>,
-                            response: Response<JoinRoomResponse>
+                            call: Call<RoomResponse>,
+                            response: Response<RoomResponse>
                         ) {
                             if (response.isSuccessful) {
                                 toolViewModel.addUserToRoom(
@@ -96,7 +106,7 @@ class WelcomeFragment : Fragment() {
                         }
 
 
-                        override fun onFailure(call: Call<JoinRoomResponse>, t: Throwable) {
+                        override fun onFailure(call: Call<RoomResponse>, t: Throwable) {
                             Log.e("joinRoom: $userRoom", "" + t.message)
                         }
                     })

@@ -38,11 +38,11 @@ class CameraToolFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupPermission()
-        Scanner()
+        scanner()
     }
 
 
-    private fun Scanner(){
+    private fun scanner(){
         codeScanner = CodeScanner(activityContext, binding.scannerView)
         codeScanner.camera = CodeScanner.CAMERA_BACK
         codeScanner.formats = CodeScanner.ALL_FORMATS

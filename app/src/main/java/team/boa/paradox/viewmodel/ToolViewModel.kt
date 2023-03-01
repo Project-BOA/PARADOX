@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ToolViewModel() : ViewModel() {
+class ToolViewModel : ViewModel() {
     // read and write
     private var _isInRoom = MutableLiveData(false)
     private var _roomID = MutableLiveData<String>()
@@ -15,7 +15,7 @@ class ToolViewModel() : ViewModel() {
     val roomId: LiveData<String> = _roomID
     val score: LiveData<Int> = _score
 
-    public fun addUserToRoom(roomId: String, score: Int) {
+    fun addUserToRoom(roomId: String, score: Int) {
         _isInRoom.value = true
         _roomID.value = roomId
         _score.value = score
