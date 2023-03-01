@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.example.prototype1.network.ApiClient
@@ -16,8 +17,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentRegisterBinding
-import team.boa.paradox.network.profile.ProfileResponse
-import team.boa.paradox.network.profile.RegisterProfile
+import team.boa.paradox.network.RegisterProfile
+import team.boa.paradox.network.RegisterProfileResponse
 import team.boa.paradox.viewmodel.ProfileViewModel
 
 class RegisterFragment : Fragment() {
@@ -43,36 +44,43 @@ class RegisterFragment : Fragment() {
 
         binding.buttonSubmitRegister.setOnClickListener() {
 
+            binding.loadingRegister.isVisible = true
+            binding.buttonSubmitRegister.isClickable = false
+
             val usernameInput = binding.editTextRegisterUsername.text?.trim().toString()
             val passwordInput =  binding.editTextRegisterPassword.text?.trim().toString()
             val biography =  binding.editTextRegisterBiography.text?.trim().toString()
 
-            if(usernameInput.isNotEmpty() && passwordInput.isNotEmpty() && biography.isNotEmpty()){
+            if(usernameInput.isNotEmpty() && passwordInput.isNotEmpty() && biography.isNotEmpty()) {
                 val userRegister = RegisterProfile(usernameInput, passwordInput, biography)
 
-                ApiClient.registerAPIService.validateRegister(userRegister)
-                    .enqueue(object : Callback<ProfileResponse> {
+                ApiClient.registerProfileAPIService.register(userRegister)
+                    .enqueue(object : Callback<RegisterProfileResponse> {
 
                         override fun onResponse(
-                            call: Call<ProfileResponse>,
-                            response: Response<ProfileResponse>
+                            call: Call<RegisterProfileResponse>,
+                            response: Response<RegisterProfileResponse>
                         ) {
                             Toast.makeText(activityContext, "Register: " + (response.body()?.status ?: response.errorBody()?.string() ?: "null"), Toast.LENGTH_LONG).show()
                             if (response.isSuccessful) {
                                 Navigation.findNavController(view).navigate(R.id.navigate_register_to_login)
-                                Log.e("validateRegister: $userRegister", response.body().toString())
+                                Log.e("register: $userRegister", response.body().toString())
                             } else {
-                                Log.d("validateRegister: $userRegister", response.raw().toString())
+                                binding.buttonSubmitRegister.isClickable = true
+                                Log.d("register: $userRegister", response.raw().toString())
                             }
+                            binding.loadingRegister.isVisible = false
                         }
 
-                        override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                            Log.e("validateRegister: $userRegister", ""+t.message)
+                        override fun onFailure(call: Call<RegisterProfileResponse>, t: Throwable) {
+                            Log.e("register: $userRegister", ""+t.message)
                         }
                     })
             }
             else {
                 Toast.makeText(activityContext, "Input required", Toast.LENGTH_LONG).show()
+                binding.buttonSubmitRegister.isClickable = true
+                binding.loadingRegister.isVisible = false
             }
         }
     }

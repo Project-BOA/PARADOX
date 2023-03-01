@@ -4,8 +4,9 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import team.boa.paradox.network.profile.LoginAPIService
-import team.boa.paradox.network.profile.RegisterAPIService
+import team.boa.paradox.network.JoinRoomAPIService
+import team.boa.paradox.network.LoginProfileAPIService
+import team.boa.paradox.network.RegisterProfileAPIService
 
 object ApiClient{
 
@@ -24,11 +25,15 @@ object ApiClient{
     }
 
     // Profile Api
-    val loginApiService: LoginAPIService by lazy {
-        retrofit.create(LoginAPIService::class.java)
+    val loginApiService: LoginProfileAPIService by lazy {
+        retrofit.create(LoginProfileAPIService::class.java)
     }
 
-    val registerAPIService: RegisterAPIService by lazy {
-        retrofit.create(RegisterAPIService::class.java)
+    val registerProfileAPIService: RegisterProfileAPIService by lazy {
+        retrofit.create(RegisterProfileAPIService::class.java)
+    }
+
+    val joinRoomAPIService: JoinRoomAPIService by lazy {
+        retrofit.create(JoinRoomAPIService::class.java)
     }
 }

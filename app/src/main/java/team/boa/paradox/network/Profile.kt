@@ -1,4 +1,4 @@
-package team.boa.paradox.network.profile
+package team.boa.paradox.network
 
 import com.squareup.moshi.Json
 import retrofit2.Call
@@ -7,7 +7,7 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 
-data class Profile (
+data class LoginProfile (
 
     @Json(name = "username")
     val username: String,
@@ -29,7 +29,7 @@ data class RegisterProfile (
 )
 
 
-data class ProfileResponse (
+data class LoginProfileResponse (
 
     @Json(name = "status")
     val status: String,
@@ -38,19 +38,23 @@ data class ProfileResponse (
     val biography: String?
 )
 
+data class RegisterProfileResponse (
+    @Json(name = "status")
+    val status: String
+)
 
-interface LoginAPIService {
+
+interface LoginProfileAPIService {
     // tell server to get profile
     @Headers("Content-type: application/json")
     @POST("profile/login")
-    fun validateLogin(@Body profile: Profile): Call<ProfileResponse>
-
+    fun login(@Body loginProfile: LoginProfile): Call<LoginProfileResponse>
 }
 
 
-interface RegisterAPIService {
-    // tell server to get profile
+interface RegisterProfileAPIService {
+    // tell server to register profile
     @Headers("Content-type: application/json")
     @POST("profile/register")
-    fun validateRegister(@Body registerProfile: RegisterProfile): Call<ProfileResponse>
+    fun register(@Body registerProfile: RegisterProfile): Call<RegisterProfileResponse>
 }

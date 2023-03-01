@@ -1,5 +1,6 @@
 package team.boa.paradox.ui.profile
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,14 +17,15 @@ import retrofit2.Callback
 import retrofit2.Response
 import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentLoginBinding
-import team.boa.paradox.network.profile.Profile
-import team.boa.paradox.network.profile.ProfileResponse
+import team.boa.paradox.network.LoginProfile
+import team.boa.paradox.network.LoginProfileResponse
 import team.boa.paradox.viewmodel.ProfileViewModel
 
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
+    private lateinit var activityContext: Context
     private val viewModel: ProfileViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -32,54 +34,70 @@ class LoginFragment : Fragment() {
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         activity?.title = "Login or Register"
+        if (container != null) {
+            activityContext = container.context
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonLogin.setOnClickListener() {
+        binding.buttonLogin.setOnClickListener {
 
-            binding.loadingLogin.isVisible = true;
+            val usernameInput = binding.editTextLoginUsername.text?.trim().toString()
+            val passwordInput =  binding.editTextLoginPassword.text?.trim().toString()
 
-            val userProfile = Profile(
-                binding.editTextLoginUsername.text.toString(),
-                binding.editTextLoginPassword.text.toString()
-            )
+            binding.loadingLogin.isVisible = true
+            if (usernameInput.isNotEmpty() && passwordInput.isNotEmpty()) {
 
-            ApiClient.loginApiService.validateLogin(userProfile)
-                .enqueue(object : Callback<ProfileResponse> {
+                val userLoginProfile = LoginProfile(
+                    usernameInput,
+                    passwordInput
+                )
+
+                ApiClient.loginApiService.login(userLoginProfile)
+                    .enqueue(object : Callback<LoginProfileResponse> {
 
 
-                    override fun onResponse(
-                        call: Call<ProfileResponse>,
-                        response: Response<ProfileResponse>
-                    ) {
-                        if (response.isSuccessful) {
-                            Log.e("validateLogin: $userProfile", response.body().toString())
-                                viewModel.setUserLoggedIn(userProfile.username, "", response.body()?.biography ?: "No Biography")
-                            binding.loadingLogin.isVisible = false;
-                            Navigation.findNavController(binding.root).navigate(R.id.navigate_login_to_profile)
+                        override fun onResponse(
+                            call: Call<LoginProfileResponse>,
+                            response: Response<LoginProfileResponse>
+                        ) {
+                            if (response.isSuccessful) {
+                                Log.e("login: $userLoginProfile", response.body().toString())
+                                viewModel.setUserLoggedIn(
+                                    userLoginProfile.username,
+                                    "",
+                                    response.body()?.biography ?: "No Biography"
+                                )
+                                Navigation.findNavController(binding.root)
+                                    .navigate(R.id.navigate_login_to_profile)
+                            } else {
+                                binding.buttonLogin.isClickable = true
+                                Toast.makeText(
+                                    binding.root.context,
+                                    response.errorBody().toString(),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                Log.d("login: $userLoginProfile", response.errorBody().toString())
+                            }
+                            binding.loadingLogin.isVisible = false
                         }
-                        else {
-                            binding.loadingLogin.isVisible = true;
-                            Toast.makeText(
-                                binding.root.context,
-                                response.errorBody().toString(),
-                                Toast.LENGTH_SHORT
-                            ).show();
-                            Log.d("validateLogin: $userProfile", response.errorBody().toString())
+
+
+                        override fun onFailure(call: Call<LoginProfileResponse>, t: Throwable) {
+                            Log.e("login: $userLoginProfile", "" + t.message)
                         }
-                    }
-
-
-                    override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                        Log.e("validateLogin: $userProfile", ""+t.message)
-                    }
-                })
+                    })
+            } else {
+                Toast.makeText(activityContext, "Input required", Toast.LENGTH_LONG).show()
+                binding.buttonLogin.isClickable = true
+                binding.loadingLogin.isVisible = false
+            }
         }
 
-        binding.buttonRegister.setOnClickListener() {
+        binding.buttonRegister.setOnClickListener {
             Navigation.findNavController(binding.root).navigate(R.id.navigate_login_to_register)
         }
     }
