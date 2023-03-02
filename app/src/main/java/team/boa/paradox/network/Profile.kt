@@ -55,4 +55,9 @@ interface ProfileAPIService {
     @Headers("Content-type: application/json")
     @POST("profile/register")
     fun register(@Body registerProfile: Profile): Call<ProfileResponse>
+
+    // where to send the edit request
+    @Headers("Content-type: application/json")
+    @POST("profile/edit")
+    fun edit(@Body editProfile: Profile): Call<ProfileResponse>
 }
