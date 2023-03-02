@@ -24,7 +24,6 @@ data class Room (
 
     @Json(name = "answer")
     val answer: String?
-
 )
 
 /**
