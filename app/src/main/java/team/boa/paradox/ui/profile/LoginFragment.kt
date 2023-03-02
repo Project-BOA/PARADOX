@@ -65,8 +65,10 @@ class LoginFragment : Fragment() {
                         call: Call<ProfileResponse>,
                         response: Response<ProfileResponse>
                     ) {
+                        // Toast the response status
+                        Toast.makeText(activityContext, response.body()?.status ?: "Error", Toast.LENGTH_LONG).show()
+
                         if (response.isSuccessful) {
-                            Log.e("login: $userLoginProfile", response.body().toString())
                             viewModel.setUserLoggedIn(
                                 userLoginProfile.username,
                                 "",
@@ -74,14 +76,11 @@ class LoginFragment : Fragment() {
                             )
                             Navigation.findNavController(binding.root)
                                 .navigate(R.id.navigate_login_to_profile)
+                            Log.d("login: $userLoginProfile", response.body().toString())
+
                         } else {
                             binding.buttonLogin.isClickable = true
-                            Toast.makeText(
-                                activityContext,
-                                response.errorBody().toString(),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            Log.d("login: $userLoginProfile", response.errorBody().toString())
+                            Log.e("login: $userLoginProfile", response.body().toString())
                         }
                         binding.loadingLogin.isVisible = false
                     }

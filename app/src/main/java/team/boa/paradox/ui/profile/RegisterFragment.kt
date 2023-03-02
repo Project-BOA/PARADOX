@@ -24,7 +24,7 @@ class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var activityContext: Context
 
-    override fun onCreateView(
+    override fun onCreateView (
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
@@ -48,23 +48,25 @@ class RegisterFragment : Fragment() {
             val passwordInput =  binding.editTextRegisterPassword.text?.trim().toString()
             val biography =  binding.editTextRegisterBiography.text?.trim().toString()
 
-            if(usernameInput.isNotEmpty() && passwordInput.isNotEmpty() && biography.isNotEmpty()) {
+            if (usernameInput.isNotEmpty() && passwordInput.isNotEmpty() && biography.isNotEmpty()) {
                 val userRegister = Profile(usernameInput, passwordInput, biography)
 
                 ApiClient.profileAPIService.register(userRegister)
-                    .enqueue(object : Callback<ProfileResponse> {
+                    .enqueue( object : Callback<ProfileResponse> {
 
-                        override fun onResponse(
+                        override fun onResponse (
                             call: Call<ProfileResponse>,
                             response: Response<ProfileResponse>
                         ) {
-                            Toast.makeText(activityContext, "Register: " + (response.body()?.status ?: response.errorBody()?.string() ?: "null"), Toast.LENGTH_LONG).show()
+                            // Toast the response status
+                            Toast.makeText(activityContext, response.body()?.status ?: "Error", Toast.LENGTH_LONG).show()
+
                             if (response.isSuccessful) {
                                 Navigation.findNavController(view).navigate(R.id.navigate_register_to_login)
-                                Log.e("register: $userRegister", response.body().toString())
+                                Log.d("register: $userRegister", response.body().toString())
                             } else {
                                 binding.buttonSubmitRegister.isClickable = true
-                                Log.d("register: $userRegister", response.raw().toString())
+                                Log.e("register: $userRegister", response.raw().toString())
                             }
                             binding.loadingRegister.isVisible = false
                         }
@@ -73,8 +75,7 @@ class RegisterFragment : Fragment() {
                             Log.e("register: $userRegister", ""+t.message)
                         }
                     })
-            }
-            else {
+            } else {
                 Toast.makeText(activityContext, "Input required", Toast.LENGTH_LONG).show()
                 binding.buttonSubmitRegister.isClickable = true
                 binding.loadingRegister.isVisible = false
