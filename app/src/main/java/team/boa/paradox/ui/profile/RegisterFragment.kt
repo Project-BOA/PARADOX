@@ -46,10 +46,11 @@ class RegisterFragment : Fragment() {
 
             val usernameInput = binding.editTextRegisterUsername.text?.trim().toString()
             val passwordInput =  binding.editTextRegisterPassword.text?.trim().toString()
+            val email =  binding.editTextRegisterBiography.text?.trim().toString()
             val biography =  binding.editTextRegisterBiography.text?.trim().toString()
 
             if (usernameInput.isNotEmpty() && passwordInput.isNotEmpty() && biography.isNotEmpty()) {
-                val userRegister = Profile(usernameInput, passwordInput, biography)
+                val userRegister = Profile(usernameInput, passwordInput, email, biography)
 
                 ApiClient.profileAPIService.register(userRegister)
                     .enqueue( object : Callback<ProfileResponse> {

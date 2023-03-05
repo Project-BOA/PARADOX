@@ -54,6 +54,7 @@ class LoginFragment : Fragment() {
                 val userLoginProfile = Profile (
                     usernameInput,
                     passwordInput,
+                    null,
                     null
                 )
 

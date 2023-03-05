@@ -21,6 +21,9 @@ data class Profile (
     @Json(name = "password")
     val password: String,
 
+    @Json(name = "email")
+    val email: String?,
+
     @Json(name = "biography")
     val biography: String?
 )
@@ -35,6 +38,9 @@ data class ProfileResponse (
 
     @Json(name = "status")
     val status: String,
+
+    @Json(name = "email")
+    val email: String?,
 
     @Json(name = "biography")
     val biography: String?

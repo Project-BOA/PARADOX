@@ -45,6 +45,32 @@ data class RoomResponse (
     val puzzleID: String?
 )
 
+
+data class LeaderboardProfile (
+    @Json(name = "name")
+    val name: String,
+
+    @Json(name = "name")
+    val position: String,
+)
+
+/**
+ * Room data class to hold the room leaderboard response
+ *
+ * @constructor Create empty Room response
+ * @property status Provides the status of the response
+ * @property score the users score
+ * @property puzzleID the puzzle id associated with the room
+ */
+data class RoomLeaderboardResponse (
+    @Json(name = "status")
+    val status: String,
+
+    @Json(name = "score")
+    val leaderboard: List<LeaderboardProfile>
+)
+
+
 /**
  * Room Application Programming Interface Service
  *
@@ -58,4 +84,8 @@ interface RoomAPIService {
     @Headers("Content-type: application/json")
     @POST("room/submit")
     fun submit(@Body room: Room): Call<RoomResponse>
+
+    @Headers("Content-type: application/json")
+    @POST("room/leaderboard")
+    fun leaderboard(@Body room: Room): Call<RoomResponse>
 }
