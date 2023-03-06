@@ -46,7 +46,7 @@ class RegisterFragment : Fragment() {
 
             val usernameInput = binding.editTextRegisterUsername.text?.trim().toString()
             val passwordInput =  binding.editTextRegisterPassword.text?.trim().toString()
-            val email =  binding.editTextRegisterBiography.text?.trim().toString()
+            val email =  binding.editTextRegisterEmail.text?.trim().toString()
             val biography =  binding.editTextRegisterBiography.text?.trim().toString()
 
             if (usernameInput.isNotEmpty() && passwordInput.isNotEmpty() && biography.isNotEmpty()) {
