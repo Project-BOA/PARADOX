@@ -63,7 +63,7 @@ class RegisterFragment : Fragment() {
                             Toast.makeText(activityContext, response.body()?.status ?: "Error", Toast.LENGTH_LONG).show()
 
                             if (response.isSuccessful) {
-                                Navigation.findNavController(view).navigate(R.id.navigate_register_to_login)
+                                Navigation.findNavController(requireView()).navigate(R.id.navigate_register_to_login)
                                 Log.d("register: $userRegister", response.body().toString())
                             } else {
                                 binding.buttonSubmitRegister.isClickable = true

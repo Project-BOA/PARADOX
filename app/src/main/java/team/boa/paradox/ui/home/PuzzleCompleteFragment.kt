@@ -33,6 +33,6 @@ class PuzzleCompleteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(binding.root)
+        navController = Navigation.findNavController(requireView())
     }
 }

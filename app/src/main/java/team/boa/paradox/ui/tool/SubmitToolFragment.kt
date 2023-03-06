@@ -44,7 +44,7 @@ class SubmitToolFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(binding.root)
+        navController = Navigation.findNavController(requireView())
 
         binding.submitButton.setOnClickListener {
             navController.navigate(R.id.navigate_submit_to_complete)

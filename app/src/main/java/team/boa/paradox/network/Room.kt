@@ -45,13 +45,21 @@ data class RoomResponse (
     val puzzleID: String?
 )
 
+/**
+ * Leaderboard Profile to hold the data for each leaderboard entry
+ *
+ * @property name the name of the user
+ * @property position the position of the user
+ */
+data class LeaderboardEntry (
+    @Json(name = "position")
+    val position: String,
 
-data class LeaderboardProfile (
     @Json(name = "name")
     val name: String,
 
-    @Json(name = "name")
-    val position: String,
+    @Json(name = "score")
+    val score: String,
 )
 
 /**
@@ -66,8 +74,8 @@ data class RoomLeaderboardResponse (
     @Json(name = "status")
     val status: String,
 
-    @Json(name = "score")
-    val leaderboard: List<LeaderboardProfile>
+    @Json(name = "leaderboard")
+    val leaderboard: List<LeaderboardEntry>
 )
 
 
@@ -87,5 +95,5 @@ interface RoomAPIService {
 
     @Headers("Content-type: application/json")
     @POST("room/leaderboard")
-    fun leaderboard(@Body room: Room): Call<RoomResponse>
+    fun leaderboard(@Body room: Room): Call<RoomLeaderboardResponse>
 }

@@ -41,7 +41,7 @@ class MorseToolFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(binding.root)
+        navController = Navigation.findNavController(requireView())
 
         // create hashmap of morse code
         // the keys are using the morse code array which is in alphabetical order

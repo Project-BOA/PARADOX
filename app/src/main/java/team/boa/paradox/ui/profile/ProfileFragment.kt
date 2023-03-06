@@ -30,7 +30,7 @@ class ProfileFragment : Fragment() {
 
         // launch login view if not already logged in
         if (viewModel.isLoggedIn.value == false) {
-            Navigation.findNavController(view).navigate(R.id.navigate_profile_to_login)
+            Navigation.findNavController(requireView()).navigate(R.id.navigate_profile_to_login)
         }
 
         binding.textProfileUsername.text = viewModel.username.value
@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
 
         binding.buttonLogout.setOnClickListener {
             viewModel.setUserloggedOut()
-            Navigation.findNavController(view).navigate(R.id.navigate_profile_to_login)
+            Navigation.findNavController(requireView()).navigate(R.id.navigate_profile_to_login)
         }
     }
 }

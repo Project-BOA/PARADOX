@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(binding.root)
+        navController = Navigation.findNavController(requireView())
 
         // launch login view if not already logged in
         //if (profileViewModel.isLoggedIn.value == false) {

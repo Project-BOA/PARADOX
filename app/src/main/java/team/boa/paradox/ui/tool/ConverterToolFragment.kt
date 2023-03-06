@@ -35,7 +35,7 @@ class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(binding.root)
+        navController = Navigation.findNavController(requireView())
         binding.option.onItemSelectedListener = this
 
         ArrayAdapter.createFromResource(
