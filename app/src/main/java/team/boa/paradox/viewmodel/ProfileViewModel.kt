@@ -3,19 +3,15 @@ package team.boa.paradox.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import team.boa.paradox.network.Profile
 
 class ProfileViewModel : ViewModel() {
     // read and write
-    private var _username = MutableLiveData<String>()
-    private var _email = MutableLiveData<String>()
-    private var _biography = MutableLiveData<String>()
+    private var _profile = MutableLiveData<Profile>()
     private var _isLoggedIn = MutableLiveData(false)
 
     // read only
     val isLoggedIn: LiveData<Boolean> = _isLoggedIn
-    val username: LiveData<String> = _username
-    val email: LiveData<String> = _email
-    val biography: LiveData<String> = _biography
 
     /**
      * Method to set the viewmodel login data
@@ -23,10 +19,8 @@ class ProfileViewModel : ViewModel() {
      * @param username
      * @param biography
      */
-    fun setUserLoggedIn(username: String, email: String, biography: String) {
-        _username.value = username
-        _email.value = email
-        _biography.value = biography
+    fun login(profile: Profile) {
+        _profile.value = profile
         _isLoggedIn.value = true
     }
 
@@ -34,11 +28,20 @@ class ProfileViewModel : ViewModel() {
      * Method that clears the viewmodel of login data
      *
      */
-    fun setUserloggedOut() {
+    fun logout() {
         _isLoggedIn.value = false
-        _username.value = ""
-        _email.value = ""
-        _biography.value = ""
+    }
+
+    /**
+     * Get the profile of the logged in user
+     *
+     * @return null if the user is not logged in
+     */
+    fun getProfile(): Profile? {
+        if (isLoggedIn.value == true) {
+            return _profile.value
+        }
+        return null
     }
 
 }

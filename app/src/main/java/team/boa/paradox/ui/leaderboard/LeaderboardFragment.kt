@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,7 +23,7 @@ import team.boa.paradox.viewmodel.ToolViewModel
 
 class LeaderboardFragment : Fragment() {
 
-    private val toolViewModel: ToolViewModel by activityViewModels()
+    private val toolData: ToolViewModel by activityViewModels()
     private lateinit var binding: FragmentLeaderboardBinding
     private lateinit var activityContext: Context
     private lateinit var navController: NavController
@@ -38,25 +40,51 @@ class LeaderboardFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(requireView())
+    private fun displayLeaderboard(room: Room) {
+        binding.loadingLeaderboard.isVisible = true
 
-        val client = ApiClient.roomAPIService.leaderboard(Room("alan", "TESTI", null));
-
+        val client = ApiClient.roomAPIService.leaderboard(room)
         client.enqueue( object : Callback<RoomLeaderboardResponse> {
             override fun onResponse(
                 call: Call<RoomLeaderboardResponse>,
                 response: Response<RoomLeaderboardResponse>
             ) {
-                Log.i("Leaderboard", response.body().toString())
+                if (isAdded) {
+                    if (response.isSuccessful) {
+                        Log.i("Leaderboard", response.body().toString())
+                        binding.recyclerViewLeaderboard.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+                        binding.recyclerViewLeaderboard.adapter = LeaderboardAdapter(response.body()?.leaderboard!!)
+                        binding.loadingLeaderboard.isVisible = false
+                    } else {
+                        binding.textViewMessageLeaderboard.text = "Error loading leaderboard"
+                        binding.textViewMessageLeaderboard.isVisible = true
+                    }
+                }
             }
 
             override fun onFailure(call: Call<RoomLeaderboardResponse>, t: Throwable) {
-                Log.i("Leaderboard Failure", t.message.toString())
+                if (isAdded) {
+                    Log.i("Leaderboard Failure", t.message.toString())
+                    binding.loadingLeaderboard.isVisible = false
+                }
             }
-
         })
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(requireView())
+
+        // check user is in room before showing
+        binding.recyclerViewLeaderboard.isVisible = false
+
+        // show if user is in room
+        if (toolData.isInRoom.value == true) {
+            binding.textBrandLeaderboard.isVisible = true
+            binding.recyclerViewLeaderboard.isVisible = true
+            displayLeaderboard(toolData.room.value!!)
+        } else {
+            binding.textViewMessageLeaderboard.isVisible = true
+        }
     }
 }

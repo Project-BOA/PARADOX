@@ -16,16 +16,16 @@ import retrofit2.http.POST
 data class Profile (
 
     @Json(name = "username")
-    val username: String,
+    var username: String,
 
     @Json(name = "password")
-    val password: String,
+    var password: String,
 
     @Json(name = "email")
-    val email: String?,
+    var email: String?,
 
     @Json(name = "biography")
-    val biography: String?
+    var biography: String?
 )
 
 /**

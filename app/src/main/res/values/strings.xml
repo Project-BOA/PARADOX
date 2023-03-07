@@ -27,4 +27,6 @@
     <string name="button_logout">Logout</string>
     <string name="edit_text_biography_hint">Biography</string>
     <string name="edit_text_email_hint">Email</string>
+    <string name="text_join_room_message">Please join room first</string>
+    <string name="text_sign_in_message">Please sign in first</string>
 </resources>

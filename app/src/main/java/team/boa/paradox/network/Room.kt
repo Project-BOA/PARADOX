@@ -17,13 +17,13 @@ import retrofit2.http.POST
  */
 data class Room (
     @Json(name = "username")
-    val username: String,
+    var username: String,
 
     @Json(name = "roomID")
-    val roomID: String,
+    var roomID: String,
 
     @Json(name = "answer")
-    val answer: String?
+    var answer: String?
 )
 
 /**
@@ -67,15 +67,14 @@ data class LeaderboardEntry (
  *
  * @constructor Create empty Room response
  * @property status Provides the status of the response
- * @property score the users score
- * @property puzzleID the puzzle id associated with the room
+ * @property leaderboard Provides the leaderboard as a list of LeaderBoardEntry's
  */
 data class RoomLeaderboardResponse (
     @Json(name = "status")
     val status: String,
 
     @Json(name = "leaderboard")
-    val leaderboard: List<LeaderboardEntry>
+    val leaderboard: List<LeaderboardEntry>?
 )
 
 

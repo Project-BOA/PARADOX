@@ -23,8 +23,7 @@ import team.boa.paradox.viewmodel.ToolViewModel
 
 class SubmitToolFragment : Fragment() {
 
-    private val profileViewModel: ProfileViewModel by activityViewModels()
-    private val toolViewModel: ToolViewModel by activityViewModels()
+    private val toolData: ToolViewModel by activityViewModels()
     private lateinit var binding: FragmentSubmitToolBinding
     private lateinit var activityContext: Context
     private lateinit var navController: NavController
@@ -42,6 +41,39 @@ class SubmitToolFragment : Fragment() {
         return binding.root
     }
 
+    private fun submitAnswer(answer: String) {
+        val userAnswer = toolData.room.value!!
+        userAnswer.answer = answer
+
+        val client = ApiClient.roomAPIService.submit(userAnswer)
+
+        val handler = object : Callback<RoomResponse> {
+
+            override fun onResponse (
+                call: Call<RoomResponse>,
+                response: Response<RoomResponse>
+            ) {
+
+                if (isAdded) {
+                    // Toast the response status
+                    Toast.makeText(
+                        activityContext,
+                        response.body()?.status ?: "Error",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<RoomResponse>, t: Throwable) {
+                if (isAdded) {
+                    Log.e("Submit: $userAnswer", "" + t.message)
+                }
+            }
+        }
+
+        client.enqueue(handler)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(requireView())
@@ -51,28 +83,17 @@ class SubmitToolFragment : Fragment() {
 
             val answerInput = binding.ansCode.text?.trim().toString()
 
-            if (answerInput.isNotEmpty()) {
-                val userAnswer = Room(profileViewModel.username.value.toString(),toolViewModel.roomId.value.toString(),answerInput)
-
-                ApiClient.roomAPIService.submit(userAnswer)
-                    .enqueue( object : Callback<RoomResponse> {
-
-                        override fun onResponse (
-                            call: Call<RoomResponse>,
-                            response: Response<RoomResponse>
-                        ) {
-                            // Toast the response status
-                            Toast.makeText(activityContext, response.body()?.status ?: "Error", Toast.LENGTH_LONG).show()
-
-                        }
-
-                        override fun onFailure(call: Call<RoomResponse>, t: Throwable) {
-                            Log.e("Submit: $userAnswer", ""+t.message)
-                        }
-                    })
-            } else {
-                Toast.makeText(activityContext, "Input required", Toast.LENGTH_LONG).show()
+            if (answerInput.isEmpty()) {
+                Toast.makeText(activityContext, "Input required", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
-        }
+
+            if (toolData.isInRoom.value == false) {
+                Toast.makeText(activityContext, "Error not in a room", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            submitAnswer(answerInput)
+            }
         }
     }

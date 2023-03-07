@@ -14,7 +14,7 @@ import team.boa.paradox.viewmodel.ProfileViewModel
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
-    private val viewModel: ProfileViewModel by activityViewModels()
+    private val profileData: ProfileViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,15 +29,15 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // launch login view if not already logged in
-        if (viewModel.isLoggedIn.value == false) {
+        if (profileData.isLoggedIn.value == false) {
             Navigation.findNavController(requireView()).navigate(R.id.navigate_profile_to_login)
         }
 
-        binding.textProfileUsername.text = viewModel.username.value
-        binding.textProfileBiography.text = viewModel.biography.value
+        binding.textProfileUsername.text = profileData.getProfile()?.username
+        binding.textProfileBiography.text = profileData.getProfile()?.biography
 
         binding.buttonLogout.setOnClickListener {
-            viewModel.setUserloggedOut()
+            profileData.logout()
             Navigation.findNavController(requireView()).navigate(R.id.navigate_profile_to_login)
         }
     }

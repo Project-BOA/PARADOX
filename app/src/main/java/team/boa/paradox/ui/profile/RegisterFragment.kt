@@ -59,21 +59,30 @@ class RegisterFragment : Fragment() {
                             call: Call<ProfileResponse>,
                             response: Response<ProfileResponse>
                         ) {
-                            // Toast the response status
-                            Toast.makeText(activityContext, response.body()?.status ?: "Error", Toast.LENGTH_LONG).show()
+                            if (isAdded) {
+                                // Toast the response status
+                                Toast.makeText(
+                                    activityContext,
+                                    response.body()?.status ?: "Error",
+                                    Toast.LENGTH_LONG
+                                ).show()
 
-                            if (response.isSuccessful) {
-                                Navigation.findNavController(requireView()).navigate(R.id.navigate_register_to_login)
-                                Log.d("register: $userRegister", response.body().toString())
-                            } else {
-                                binding.buttonSubmitRegister.isClickable = true
-                                Log.e("register: $userRegister", response.raw().toString())
+                                if (response.isSuccessful) {
+                                    Navigation.findNavController(requireView())
+                                        .navigate(R.id.navigate_register_to_login)
+                                    Log.d("register: $userRegister", response.body().toString())
+                                } else {
+                                    binding.buttonSubmitRegister.isClickable = true
+                                    Log.e("register: $userRegister", response.raw().toString())
+                                }
+                                binding.loadingRegister.isVisible = false
                             }
-                            binding.loadingRegister.isVisible = false
                         }
 
                         override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                            Log.e("register: $userRegister", ""+t.message)
+                            if (isAdded) {
+                                Log.e("register: $userRegister", "" + t.message)
+                            }
                         }
                     })
             } else {

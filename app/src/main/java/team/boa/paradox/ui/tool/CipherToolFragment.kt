@@ -6,15 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import team.boa.paradox.databinding.FragmentCipherToolBinding
-import team.boa.paradox.viewmodel.ToolViewModel
 
 class CipherToolFragment : Fragment() {
 
-    private val toolViewModel: ToolViewModel by activityViewModels()
     private lateinit var binding: FragmentCipherToolBinding
     private lateinit var activityContext: Context
     private lateinit var navController: NavController
@@ -31,31 +28,31 @@ class CipherToolFragment : Fragment() {
         return binding.root
     }
 
+    private val ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+
+    //out = (x-n)%26
+    private fun shiftText(text: String, key:Int): String {
+        val sb = StringBuilder()
+
+        for(ch in text.lowercase()) {
+            var newChar = ((ch.code - key) % 128).toChar()
+            if (newChar.code < 0) {
+                newChar = 128.toChar()
+            }
+            sb.append(newChar)
+        }
+        return sb.toString().uppercase()
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(requireView())
         binding.decode.setOnClickListener {
-            binding.outputText.text = pushAlphabet(
+            binding.outputText.text = shiftText(
                 binding.inputText.text.toString(),
                 binding.numberPush.text.toString().toInt()
             )
         }
-    }
-
-    val ALPHABET = "abcdefghijklmnopqrstuvwxyz"
-
-    //out = (x-n)%26
-    private fun pushAlphabet(text: String, s:Int): String {
-        val sb = StringBuilder()
-
-        for(ch in text.lowercase()) {
-            val pos = ALPHABET.indexOf(ch)
-            var newPos = (pos - s) % 26
-            if (newPos < 0) {
-                newPos += ALPHABET.length
-            }
-            sb.append(ALPHABET[newPos])
-        }
-        return sb.toString().uppercase()
     }
 }

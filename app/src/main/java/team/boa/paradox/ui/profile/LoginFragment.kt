@@ -11,12 +11,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
-import team.boa.paradox.network.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentLoginBinding
+import team.boa.paradox.network.ApiClient
 import team.boa.paradox.network.Profile
 import team.boa.paradox.network.ProfileResponse
 import team.boa.paradox.viewmodel.ProfileViewModel
@@ -26,7 +26,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var activityContext: Context
-    private val viewModel: ProfileViewModel by activityViewModels()
+    private val profileData: ProfileViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,29 +66,33 @@ class LoginFragment : Fragment() {
                         call: Call<ProfileResponse>,
                         response: Response<ProfileResponse>
                     ) {
-                        // Toast the response status
-                        Toast.makeText(activityContext, response.body()?.status ?: "Error", Toast.LENGTH_LONG).show()
+                        if (isAdded) {
+                            // Toast the response status
+                            Toast.makeText(activityContext, response.body()?.status ?: "Error", Toast.LENGTH_LONG).show()
 
-                        if (response.isSuccessful) {
-                            viewModel.setUserLoggedIn(
-                                userLoginProfile.username,
-                                "",
-                                response.body()?.biography ?: "No Biography"
-                            )
-                            Navigation.findNavController(binding.root)
-                                .navigate(R.id.navigate_login_to_profile)
-                            Log.d("login: $userLoginProfile", response.body().toString())
+                            if (response.isSuccessful) {
+                                profileData.login(Profile(
+                                    usernameInput,
+                                    passwordInput,
+                                    response.body()?.email ?: "No Email",
+                                    response.body()?.biography ?: "No Biography"
+                                ))
+                                Navigation.findNavController(binding.root)
+                                    .navigate(R.id.navigate_login_to_profile)
+                                Log.d("login: $userLoginProfile", response.body().toString())
 
-                        } else {
-                            binding.buttonLogin.isClickable = true
-                            Log.e("login: $userLoginProfile", response.body().toString())
+                            } else {
+                                binding.buttonLogin.isClickable = true
+                                Log.e("login: $userLoginProfile", response.body().toString())
+                            }
+                            binding.loadingLogin.isVisible = false
                         }
-                        binding.loadingLogin.isVisible = false
                     }
 
-
                     override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                        Log.e("login: $userLoginProfile", "" + t.message)
+                        if (isAdded) {
+                            Log.e("login: $userLoginProfile", "" + t.message)
+                        }
                     }
                 }
             )

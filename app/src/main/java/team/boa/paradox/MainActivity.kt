@@ -24,8 +24,4 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        // save viewmodel stuff to save preferences
-    }
 }
