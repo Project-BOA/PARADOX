@@ -1,5 +1,6 @@
 package team.boa.paradox.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,14 +26,6 @@ class ProfileViewModel : ViewModel() {
     }
 
     /**
-     * Method that clears the viewmodel of login data
-     *
-     */
-    fun logout() {
-        _isLoggedIn.value = false
-    }
-
-    /**
      * Get the profile of the logged in user
      *
      * @return null if the user is not logged in
@@ -44,4 +37,14 @@ class ProfileViewModel : ViewModel() {
         return null
     }
 
+    /**
+     * Method that clears the viewmodel of login data
+     *
+     */
+    fun logout(context: Context) {
+        // remove profile from preferences
+        val profileSharedPreferences = context.getSharedPreferences("Profile", Context.MODE_PRIVATE)
+        profileSharedPreferences.edit().remove("Profile").apply();
+        _isLoggedIn.value = false
+    }
 }

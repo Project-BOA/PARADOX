@@ -37,7 +37,7 @@ class ProfileFragment : Fragment() {
         binding.textProfileBiography.text = profileData.getProfile()?.biography
 
         binding.buttonLogout.setOnClickListener {
-            profileData.logout()
+            profileData.logout(view.context)
             Navigation.findNavController(requireView()).navigate(R.id.navigate_profile_to_login)
         }
     }

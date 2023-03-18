@@ -21,14 +21,14 @@ import team.boa.paradox.databinding.FragmentWelcomeBinding
 import team.boa.paradox.network.RoomResponse
 import team.boa.paradox.network.Room
 import team.boa.paradox.viewmodel.ProfileViewModel
-import team.boa.paradox.viewmodel.ToolViewModel
+import team.boa.paradox.viewmodel.RoomViewModel
 
 class WelcomeFragment : Fragment() {
 
     private lateinit var binding: FragmentWelcomeBinding
     private lateinit var activityContext: Context
     private lateinit var navController: NavController
-    private val toolData: ToolViewModel by activityViewModels()
+    private val toolData: RoomViewModel by activityViewModels()
     private val profileData: ProfileViewModel by activityViewModels()
 
     override fun onCreateView(

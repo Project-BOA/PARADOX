@@ -19,11 +19,11 @@ import team.boa.paradox.databinding.FragmentLeaderboardBinding
 import team.boa.paradox.network.ApiClient
 import team.boa.paradox.network.Room
 import team.boa.paradox.network.RoomLeaderboardResponse
-import team.boa.paradox.viewmodel.ToolViewModel
+import team.boa.paradox.viewmodel.RoomViewModel
 
 class LeaderboardFragment : Fragment() {
 
-    private val toolData: ToolViewModel by activityViewModels()
+    private val toolData: RoomViewModel by activityViewModels()
     private lateinit var binding: FragmentLeaderboardBinding
     private lateinit var activityContext: Context
     private lateinit var navController: NavController
@@ -82,7 +82,7 @@ class LeaderboardFragment : Fragment() {
         if (toolData.isInRoom.value == true) {
             binding.textBrandLeaderboard.isVisible = true
             binding.recyclerViewLeaderboard.isVisible = true
-            displayLeaderboard(toolData.room.value!!)
+            displayLeaderboard(toolData.getRoom()!!)
         } else {
             binding.textViewMessageLeaderboard.isVisible = true
         }

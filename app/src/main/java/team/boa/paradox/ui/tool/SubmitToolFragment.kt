@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -18,12 +17,11 @@ import retrofit2.Response
 import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentSubmitToolBinding
 import team.boa.paradox.network.*
-import team.boa.paradox.viewmodel.ProfileViewModel
-import team.boa.paradox.viewmodel.ToolViewModel
+import team.boa.paradox.viewmodel.RoomViewModel
 
 class SubmitToolFragment : Fragment() {
 
-    private val toolData: ToolViewModel by activityViewModels()
+    private val toolData: RoomViewModel by activityViewModels()
     private lateinit var binding: FragmentSubmitToolBinding
     private lateinit var activityContext: Context
     private lateinit var navController: NavController
@@ -42,7 +40,7 @@ class SubmitToolFragment : Fragment() {
     }
 
     private fun submitAnswer(answer: String) {
-        val userAnswer = toolData.room.value!!
+        val userAnswer = toolData.getRoom()!!
         userAnswer.answer = answer
 
         val client = ApiClient.roomAPIService.submit(userAnswer)

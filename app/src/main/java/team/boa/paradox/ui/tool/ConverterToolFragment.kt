@@ -12,11 +12,11 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentConverterToolBinding
-import team.boa.paradox.viewmodel.ToolViewModel
+import team.boa.paradox.viewmodel.RoomViewModel
 
 class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
-    private val toolViewModel: ToolViewModel by activityViewModels()
+    private val roomViewModel: RoomViewModel by activityViewModels()
     private lateinit var binding: FragmentConverterToolBinding
     private lateinit var activityContext: Context
     private lateinit var navController: NavController
