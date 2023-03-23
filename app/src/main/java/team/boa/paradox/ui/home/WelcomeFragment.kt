@@ -104,6 +104,7 @@ class WelcomeFragment : Fragment() {
         if (profileData.isLoggedIn.value == true) {
             binding.editTextPuzzleId.isVisible = true
             binding.buttonPuzzleId.isVisible = true
+
         } else {
             binding.textViewMessage.isVisible = true
         }

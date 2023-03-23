@@ -49,6 +49,7 @@ class CipherToolFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(requireView())
         binding.decode.setOnClickListener {
+            if (binding.inputText.text.isNotEmpty() && binding.numberPush.text.isNotEmpty())
             binding.outputText.text = shiftText(
                 binding.inputText.text.toString(),
                 binding.numberPush.text.toString().toInt()

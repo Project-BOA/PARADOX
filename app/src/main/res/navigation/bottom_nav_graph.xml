@@ -125,5 +125,9 @@
         <action
             android:id="@+id/navigate_submit_to_complete"
             app:destination="@id/puzzleCompleteFragment" />
+        <action
+            android:id="@+id/navigate_submit_to_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/mobile_navigation" />
     </fragment>
 </navigation>

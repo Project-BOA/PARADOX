@@ -39,7 +39,7 @@ class SubmitToolFragment : Fragment() {
         return binding.root
     }
 
-    private fun submitAnswer(answer: String) {
+    private fun submitAnswer(answer: String, navController: NavController) {
         val userAnswer = toolData.getRoom()!!
         userAnswer.answer = answer
 
@@ -51,14 +51,24 @@ class SubmitToolFragment : Fragment() {
                 call: Call<RoomResponse>,
                 response: Response<RoomResponse>
             ) {
-
                 if (isAdded) {
+                    val status = response.body()?.status ?: "Error"
                     // Toast the response status
                     Toast.makeText(
                         activityContext,
-                        response.body()?.status ?: "Error",
+                        status,
                         Toast.LENGTH_LONG
                     ).show()
+
+                    if (status.contains("OK"))
+                        navController.navigate(R.id.navigate_submit_to_home)
+
+//                    if (status.equals("OK - SINGLE"))
+//                        navController.navigate(R.id.navigate_submit_to_complete)
+//                    if (status.equals("OK - MULTI"))
+//                        navController.navigate(R.id.nav)
+//                    if (status.equals("OK - TIME"))
+//                        navController.navigate(R.id.nav)
                 }
             }
 
@@ -77,8 +87,6 @@ class SubmitToolFragment : Fragment() {
         navController = Navigation.findNavController(requireView())
 
         binding.submitButton.setOnClickListener {
-            navController.navigate(R.id.navigate_submit_to_complete)
-
             val answerInput = binding.ansCode.text?.trim().toString()
 
             if (answerInput.isEmpty()) {
@@ -91,7 +99,8 @@ class SubmitToolFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            submitAnswer(answerInput)
-            }
+            submitAnswer(answerInput, navController)
+
+        }
         }
     }

@@ -3,9 +3,8 @@ package team.boa.paradox
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.forEach
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -46,7 +45,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         // get viewmodel shared preferences
         roomViewModel = ViewModelProvider(this)[RoomViewModel::class.java]
@@ -64,9 +62,23 @@ class MainActivity : AppCompatActivity() {
             roomAdapter.fromJson(it)?.let { room -> roomViewModel.setRoom(room) }
         }
 
+        setContentView(binding.root)
+
         // add navigation
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        navController.addOnDestinationChangedListener { controller, destination, _ ->
+            if (destination.id != navView.selectedItemId) {
+                controller.backQueue.asReversed().drop(1).forEach { entry ->
+                    navView.menu.forEach { item ->
+                        if (entry.destination.id == item.itemId) {
+                            item.isChecked = true
+                            return@addOnDestinationChangedListener
+                        }
+                    }
+                }
+            }
+        }
         navView.setupWithNavController(navController)
     }
 

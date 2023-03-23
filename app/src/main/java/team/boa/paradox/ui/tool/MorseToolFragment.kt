@@ -58,17 +58,24 @@ class MorseToolFragment : Fragment() {
                 binding.inText.text = str.substring(0, str.length - 1)
             }
         }
+
         binding.conButton.setOnClickListener {
-            for(morseChar in binding.inText.toString().split(" ")) {
-                binding.outText.text = binding.outText.text.toString() + morseMap[morseChar]
+            val sb = StringBuilder()
+            for (morseChar in binding.inText.text.toString().split(" ")) {
+                if (morseMap.containsKey(morseChar))
+                    sb.append(morseMap[morseChar])
+                else
+                    sb.append(' ')
             }
+            binding.outText.text = sb.toString()
         }
     }
 
 
     private fun addText(textToAdd: String) {
-        if (binding.inText.text.isNotEmpty()) {
-            binding.inText.text = binding.inText.text.toString() + textToAdd
+        if (binding.inText.text.isEmpty()) {
+            binding.inText.text = ""
         }
+        binding.inText.text = binding.inText.text.toString() + textToAdd
     }
 }
