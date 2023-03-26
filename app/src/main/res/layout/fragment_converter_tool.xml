@@ -7,116 +7,56 @@
     tools:context=".ui.tool.ConverterToolFragment">
 
 
-    <LinearLayout
-        android:id="@+id/converter_buttons"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enter_text"
-        tools:visibility="gone">
-
-        <Button
-            android:id="@+id/a_button"
-            android:layout_width="49dp"
-            android:layout_height="48dp"
-            android:insetLeft="2dp"
-            android:insetRight="2dp"
-            android:text="A" />
-
-        <Button
-            android:id="@+id/b_button"
-            android:layout_width="49dp"
-            android:layout_height="48dp"
-            android:insetLeft="2dp"
-            android:insetRight="2dp"
-            android:text="B" />
-
-        <Button
-            android:id="@+id/c_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:insetLeft="2dp"
-            android:insetRight="2dp"
-            android:text="C" />
-
-        <Button
-            android:id="@+id/d_button"
-            android:layout_width="49dp"
-            android:layout_height="48dp"
-            android:insetLeft="2dp"
-            android:insetRight="2dp"
-            android:text="D" />
-
-        <Button
-            android:id="@+id/e_button"
-            android:layout_width="49dp"
-            android:layout_height="48dp"
-            android:insetLeft="2dp"
-            android:insetRight="2dp"
-            android:text="E" />
-
-        <Button
-            android:id="@+id/f_button"
-            android:layout_width="49dp"
-            android:layout_height="48dp"
-            android:insetLeft="2dp"
-            android:insetRight="2dp"
-            android:text="F" />
-
-    </LinearLayout>
-
     <TextView
         android:id="@+id/output_text"
         android:layout_width="350dp"
-        android:layout_height="225dp"
-        android:layout_marginBottom="28dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/enter_text"
-        android:layout_width="350dp"
-        android:layout_height="225dp"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="Enter Encoded Text Here"
-        android:inputType="text"
-        android:text=""
+        android:text="Result will appear here"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/enter_text"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
+        android:ems="10"
+        android:hint="Enter Encoded Text Here"
+        android:inputType="text"
+        android:text=""
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/output_text" />
+
     <Button
         android:id="@+id/decode_button"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="41dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:text="Decode"
-        app:layout_constraintBottom_toTopOf="@+id/output_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.852"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/converter_buttons" />
+        app:layout_constraintTop_toBottomOf="@+id/enter_text" />
 
     <Spinner
         android:id="@+id/option"
-        android:layout_width="216dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="80dp"
         android:contentDescription="@string/app_name"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/output_text"
+        app:layout_constraintBottom_toTopOf="@+id/decode_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/converter_buttons" />
+        app:layout_constraintTop_toBottomOf="@+id/enter_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

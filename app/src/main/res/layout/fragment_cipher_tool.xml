@@ -10,10 +10,12 @@
         android:id="@+id/number_push"
         android:layout_width="100dp"
         android:layout_height="48dp"
+        android:layout_marginTop="124dp"
         android:ems="10"
         android:hint="Key"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/output_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,37 +24,41 @@
     <EditText
         android:id="@+id/input_text"
         android:layout_width="350dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
         android:hint="Enter Cipher Text Here"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         android:text=""
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/output_text" />
 
     <TextView
         android:id="@+id/output_text"
         android:layout_width="350dp"
-        android:layout_height="300dp"
-        android:layout_marginBottom="24dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
         android:gravity="center"
+        android:hint="Result will appear here"
         android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/decode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
         android:text="Decode"
-        app:layout_constraintBottom_toTopOf="@+id/output_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
-        app:layout_constraintStart_toEndOf="@+id/number_push"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

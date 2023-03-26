@@ -14,7 +14,7 @@ import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentConverterToolBinding
 import team.boa.paradox.viewmodel.RoomViewModel
 
-class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class ConverterToolFragment : Fragment() {
 
     private val roomViewModel: RoomViewModel by activityViewModels()
     private lateinit var binding: FragmentConverterToolBinding
@@ -36,7 +36,6 @@ class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(requireView())
-        binding.option.onItemSelectedListener = this
 
         ArrayAdapter.createFromResource(
             activityContext,
@@ -62,13 +61,6 @@ class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
             }
         }
-
-        binding.aButton.setOnClickListener {inputText.text = inputText.text.toString() + "A" }
-        binding.bButton.setOnClickListener {inputText.text = inputText.text.toString() + "B" }
-        binding.cButton.setOnClickListener {inputText.text = inputText.text.toString() + "C" }
-        binding.dButton.setOnClickListener {inputText.text = inputText.text.toString() + "D" }
-        binding.eButton.setOnClickListener {inputText.text = inputText.text.toString() + "E" }
-        binding.fButton.setOnClickListener {inputText.text = inputText.text.toString() + "F" }
     }
 
     private fun binToString(binary:String): String {
@@ -111,18 +103,5 @@ class ConverterToolFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
 
         return sb.toString()
-    }
-
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
-        if (binding.option.getItemAtPosition(p2).toString() == "Hexadecimal") {
-            binding.converterButtons.visibility = View.VISIBLE
-        }
-        else {
-            binding.converterButtons.visibility = View.GONE
-        }
-    }
-
-    override fun onNothingSelected(p0: AdapterView<*>?) {
     }
 }
