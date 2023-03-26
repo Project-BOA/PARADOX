@@ -50,10 +50,10 @@ class CipherToolFragment : Fragment() {
         navController = Navigation.findNavController(requireView())
         binding.decode.setOnClickListener {
             if (binding.inputText.text.isNotEmpty() && binding.numberPush.text.isNotEmpty())
-            binding.outputText.text = shiftText(
-                binding.inputText.text.toString(),
-                binding.numberPush.text.toString().toInt()
-            )
+                binding.outputText.text = shiftText(
+                    binding.inputText.text.toString(),
+                    binding.numberPush.text.toString().toInt()
+                )
         }
     }
 }

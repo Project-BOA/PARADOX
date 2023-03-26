@@ -71,7 +71,7 @@ class LoginFragment : Fragment() {
                             Toast.makeText(activityContext, response.body()?.status ?: "Error", Toast.LENGTH_LONG).show()
 
                             if (response.isSuccessful) {
-                                profileData.login(Profile(
+                                profileData.login(activityContext, Profile(
                                     usernameInput,
                                     passwordInput,
                                     response.body()?.email ?: "No Email",

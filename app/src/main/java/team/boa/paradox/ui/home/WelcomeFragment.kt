@@ -100,6 +100,8 @@ class WelcomeFragment : Fragment() {
         binding.editTextPuzzleId.isVisible = false
         binding.buttonPuzzleId.isVisible = false
 
+        profileData.loadData(activityContext);
+
         // show if user is logged in
         if (profileData.isLoggedIn.value == true) {
             binding.editTextPuzzleId.isVisible = true

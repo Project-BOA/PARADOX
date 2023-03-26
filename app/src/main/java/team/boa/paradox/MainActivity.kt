@@ -54,10 +54,6 @@ class MainActivity : AppCompatActivity() {
 
         // check saved preferences for data and load into viewmodel
 
-        profileSharedPreferences.getString("Profile", null)?.let {
-            profileAdapter.fromJson(it)?.let { profile -> profileViewModel.login(profile) }
-        }
-
         toolSharedPreferences.getString("Room", null)?.let {
             roomAdapter.fromJson(it)?.let { room -> roomViewModel.setRoom(room) }
         }
@@ -86,9 +82,5 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
 
         // add persistent preferences
-        if (profileViewModel.isLoggedIn.value == true) {
-            profileSharedPreferences.edit()
-                .putString("Profile", profileAdapter.toJson(profileViewModel.getProfile())).apply()
-        }
     }
 }
