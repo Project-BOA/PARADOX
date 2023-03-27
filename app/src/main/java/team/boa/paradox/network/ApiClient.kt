@@ -8,10 +8,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 object ApiClient{
 
     // production branch
-    // private val BASE_URL = "https://paradox-kappa.vercel.app//api/"
+     private val BASE_URL = "https://paradox-kappa.vercel.app/api/"
 
     // testing on dev branch
-    private val BASE_URL = "https://paradox-git-dev-team-boa.vercel.app/api/"
+//    private val BASE_URL = "https://paradox-git-dev-team-boa.vercel.app/api/"
 
     //variable for moshi builder to add converter
     private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
