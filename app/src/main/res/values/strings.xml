@@ -29,4 +29,5 @@
     <string name="edit_text_email_hint">Email</string>
     <string name="text_join_room_message">Please join room first</string>
     <string name="text_sign_in_message">Please sign in first</string>
+    <string name="get_roomids_at_the_parad0x_website">Get RoomIds at the Parad0x Website</string>
 </resources>

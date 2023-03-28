@@ -2,7 +2,10 @@ package team.boa.paradox
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
 import androidx.lifecycle.ViewModelProvider
@@ -59,7 +62,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         setContentView(binding.root)
-
         // add navigation
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -77,6 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
         navView.setupWithNavController(navController)
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

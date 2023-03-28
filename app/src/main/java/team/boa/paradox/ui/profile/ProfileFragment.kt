@@ -1,12 +1,12 @@
 package team.boa.paradox.ui.profile
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.isVisible
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
@@ -19,6 +19,7 @@ import team.boa.paradox.network.ApiClient
 import team.boa.paradox.network.Profile
 import team.boa.paradox.network.ProfileResponse
 import team.boa.paradox.viewmodel.ProfileViewModel
+
 
 class ProfileFragment : Fragment() {
 
@@ -37,6 +38,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupLinkButton()
         // launch login view if not already logged in
         if (profileData.isLoggedIn.value == false) {
             Navigation.findNavController(requireView()).navigate(R.id.navigate_profile_to_login)
@@ -70,5 +72,17 @@ class ProfileFragment : Fragment() {
             profileData.logout(view.context)
             Navigation.findNavController(requireView()).navigate(R.id.navigate_profile_to_login)
         }
+    }
+
+    fun setupLinkButton() {
+        val linkButton = view?.findViewById<TextView>(R.id.link_to_site)
+        linkButton?.setOnClickListener {
+            val browserIntent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://paradox-c8zo3cj6e-team-boa.vercel.app/login")
+            )
+            startActivity(browserIntent)
+        }
+
     }
 }
