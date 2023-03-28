@@ -66,4 +66,9 @@ interface ProfileAPIService {
     @Headers("Content-type: application/json")
     @POST("profile/edit")
     fun edit(@Body editProfile: Profile): Call<ProfileResponse>
+
+    // where to send the logout request
+    @Headers("Content-type: application/json")
+    @POST("profile/logout")
+    fun logout(@Body logoutProfile: Profile): Call<ProfileResponse>
 }
