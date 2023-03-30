@@ -55,6 +55,7 @@ class LoginFragment : Fragment() {
                     usernameInput,
                     passwordInput,
                     null,
+                    null,
                     null
                 )
 
@@ -75,7 +76,8 @@ class LoginFragment : Fragment() {
                                     usernameInput,
                                     passwordInput,
                                     response.body()?.email ?: "No Email",
-                                    response.body()?.biography ?: "No Biography"
+                                    response.body()?.biography ?: "No Biography",
+                                    response.body()?.newPassword ?: "No NewPassword"
                                 ))
                                 Navigation.findNavController(binding.root)
                                     .navigate(R.id.navigate_login_to_profile)

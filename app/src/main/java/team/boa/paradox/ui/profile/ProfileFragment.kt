@@ -50,8 +50,14 @@ class ProfileFragment : Fragment() {
             profileData.getProfile()?.username.toString(),
             profileData.getProfile()?.password.toString(),
             null,
-            null
+            null,
+        null
         )
+
+
+        binding.buttonEdit.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.navigate_profile_to_edit)
+        }
         binding.buttonLogout.setOnClickListener {
             ApiClient.profileAPIService.logout(userLogoutProfile).enqueue (
                 object : Callback<ProfileResponse> {

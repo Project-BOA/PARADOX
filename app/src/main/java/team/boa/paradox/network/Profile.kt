@@ -25,7 +25,10 @@ data class Profile (
     var email: String?,
 
     @Json(name = "biography")
-    var biography: String?
+    var biography: String?,
+
+    @Json(name = "newPassword")
+    val newPassword: String?
 )
 
 /**
@@ -43,7 +46,11 @@ data class ProfileResponse (
     val email: String?,
 
     @Json(name = "biography")
-    val biography: String?
+    val biography: String?,
+    @Json(name = "newPassword")
+    val newPassword: String?
+
+
 )
 
 /**
@@ -71,4 +78,6 @@ interface ProfileAPIService {
     @Headers("Content-type: application/json")
     @POST("profile/logout")
     fun logout(@Body logoutProfile: Profile): Call<ProfileResponse>
+
+
 }

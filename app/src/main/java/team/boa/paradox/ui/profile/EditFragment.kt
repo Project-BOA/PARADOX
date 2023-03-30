@@ -9,27 +9,30 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import team.boa.paradox.R
-import team.boa.paradox.databinding.FragmentRegisterBinding
+import team.boa.paradox.databinding.FragmentEditBinding
 import team.boa.paradox.network.ApiClient
 import team.boa.paradox.network.Profile
 import team.boa.paradox.network.ProfileResponse
+import team.boa.paradox.viewmodel.ProfileViewModel
 
-class RegisterFragment : Fragment() {
+class EditFragment : Fragment() {
 
-    private lateinit var binding: FragmentRegisterBinding
+    private lateinit var binding: FragmentEditBinding
     private lateinit var activityContext: Context
+    private val profileData: ProfileViewModel by activityViewModels()
 
     override fun onCreateView (
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        activity?.title = "Register"
+        binding = FragmentEditBinding.inflate(inflater, container, false)
+        activity?.title = "Edit"
         if (container != null) {
             activityContext = container.context
         }
@@ -38,21 +41,23 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (profileData.isLoggedIn.value == false) {
+            Navigation.findNavController(requireView()).navigate(R.id.navigate_profile_to_login)
+        }
+        binding.buttonSubmitEdit.setOnClickListener {
 
-        binding.buttonSubmitRegister.setOnClickListener {
+            binding.loadingEdit.isVisible = true
+            binding.buttonSubmitEdit.isClickable = false
 
-            binding.loadingRegister.isVisible = true
-            binding.buttonSubmitRegister.isClickable = false
+            val usernameInput = profileData.getProfile()?.username.toString()
+            val passwordInput =  binding.editTextEditPassword.text?.trim().toString()
+            val newpasswordInput =  binding.editTextEditNewPassword.text?.trim().toString()
+            val biography =  binding.editTextEditBiography.text?.trim().toString()
 
-            val usernameInput = binding.editTextRegisterUsername.text?.trim().toString()
-            val passwordInput =  binding.editTextRegisterPassword.text?.trim().toString()
-            val email =  binding.editTextRegisterEmail.text?.trim().toString()
-            val biography =  binding.editTextRegisterBiography.text?.trim().toString()
+            if (usernameInput.isNotEmpty() && passwordInput.isNotEmpty()&& newpasswordInput.isNotEmpty() && biography.isNotEmpty()) {
+                val userEdit = Profile(usernameInput, passwordInput, null, biography,newpasswordInput)
 
-            if (usernameInput.isNotEmpty() && passwordInput.isNotEmpty() && biography.isNotEmpty()) {
-                val userRegister = Profile(usernameInput, passwordInput, email, biography,null)
-
-                ApiClient.profileAPIService.register(userRegister)
+                ApiClient.profileAPIService.edit(userEdit)
                     .enqueue( object : Callback<ProfileResponse> {
 
                         override fun onResponse (
@@ -69,26 +74,26 @@ class RegisterFragment : Fragment() {
 
                                 if (response.isSuccessful) {
                                     Navigation.findNavController(requireView())
-                                        .navigate(R.id.navigate_register_to_login)
-                                    Log.d("register: $userRegister", response.body().toString())
+                                        .navigate(R.id.profile_edit_to_profile)
+                                    Log.d("Edit: $userEdit", response.body().toString())
                                 } else {
-                                    binding.buttonSubmitRegister.isClickable = true
-                                    Log.e("register: $userRegister", response.raw().toString())
+                                    binding.buttonSubmitEdit.isClickable = true
+                                    Log.e("Edit: $userEdit", response.raw().toString())
                                 }
-                                binding.loadingRegister.isVisible = false
+                                binding.loadingEdit.isVisible = false
                             }
                         }
 
                         override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
                             if (isAdded) {
-                                Log.e("register: $userRegister", "" + t.message)
+                                Log.e("Edit: $userEdit", "" + t.message)
                             }
                         }
                     })
             } else {
                 Toast.makeText(activityContext, "Input required", Toast.LENGTH_LONG).show()
-                binding.buttonSubmitRegister.isClickable = true
-                binding.loadingRegister.isVisible = false
+                binding.buttonSubmitEdit.isClickable = true
+                binding.loadingEdit.isVisible = false
             }
         }
     }
