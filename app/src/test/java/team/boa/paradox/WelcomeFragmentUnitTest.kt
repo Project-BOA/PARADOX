@@ -31,4 +31,12 @@ class WelcomeFragmentUnitTest {
         assertEquals("HELLOABD", method.invoke(fragment, "HELLOabd"))
         assertEquals("TEST", method.invoke(fragment, "  ><test''[;   "))
     }
+
+
+    @Test
+    fun morseConvert_isCorrect() {
+
+
+        assertEquals(5, 2+2)
+    }
 }
