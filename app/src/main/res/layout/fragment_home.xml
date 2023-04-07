@@ -24,10 +24,12 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
+                android:drawableTop="@drawable/ic_morse_button"
                 android:insetLeft="6dp"
                 android:insetTop="6dp"
                 android:insetRight="6dp"
                 android:insetBottom="6dp"
+
                 android:text="Morse"
                 android:textColor="#5E35B1" />
 
@@ -50,15 +52,11 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/notes_button"
+                android:id="@+id/converter_button"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:insetLeft="6dp"
-                android:insetTop="6dp"
-                android:insetRight="6dp"
-                android:insetBottom="6dp"
-                android:text="Notes"
+                android:text="Converter"
                 android:textColor="#5E35B1" />
 
             <Button
@@ -72,37 +70,38 @@
                 android:insetBottom="6dp"
                 android:text="Camera"
                 android:textColor="#5E35B1" />
+
         </TableRow>
 
-        <TableRow
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/converter_button"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:insetLeft="6dp"
-                android:insetTop="6dp"
-                android:insetRight="6dp"
-                android:insetBottom="6dp"
-                android:text="Converter"
-                android:textColor="#5E35B1" />
+                android:id="@+id/notes_button"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:text="Notes"
+                android:textColor="#5E35B1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="1dp" />
 
             <Button
                 android:id="@+id/submit_button"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:insetLeft="6dp"
-                android:insetTop="6dp"
-                android:insetRight="6dp"
-                android:insetBottom="6dp"
-                android:text="Submit"
-                android:textColor="#5E35B1" />
-        </TableRow>
+                android:backgroundTint="@color/purple_700"
+                android:layout_width="318dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="36dp"
+                android:text="Submit Answer"
+                android:textColor="#5E35B1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </TableLayout>
 

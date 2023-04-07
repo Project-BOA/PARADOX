@@ -33,7 +33,7 @@
         android:minHeight="48dp"
         android:selectAllOnFocus="true"
         android:textAlignment="center"
-        android:textColor="@color/teal_700"
+        android:textColor="@color/white"
         android:textColorHint="@color/teal_700"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
