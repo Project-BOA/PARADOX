@@ -75,15 +75,5 @@ internal class ToolFragmentTest {
     }
 
 
-//    @Test
-//    fun morseTest() {
-//
-//        val method: Method = MorseToolFragment::class.java.getDeclaredMethod("shiftText",String::class.java ,Int::class.java)
-//
-//        method.isAccessible = true
-//        val fragment = CipherToolFragment()
-//
-//        assertEquals("CIPHER",method.invoke(fragment,"jpwoly",7));
-//    }
 
 }
