@@ -58,6 +58,7 @@ class LeaderboardFragment : Fragment() {
                     } else {
                         binding.textViewMessageLeaderboard.text = "Error loading leaderboard"
                         binding.textViewMessageLeaderboard.isVisible = true
+                        binding.loadingLeaderboard.isVisible = false
                     }
                 }
             }

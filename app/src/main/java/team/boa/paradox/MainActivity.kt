@@ -62,6 +62,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         setContentView(binding.root)
+
+        // set background
+        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.darkgreen_200));
+
         // add navigation
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)

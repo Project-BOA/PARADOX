@@ -19,7 +19,7 @@
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
 
-        <item name="android:background">@color/darkgreen_200</item>
+<!--        <item name="android:background">@color/darkgreen_200</item>-->
 
 
     </style>

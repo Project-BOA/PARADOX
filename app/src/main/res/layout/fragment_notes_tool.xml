@@ -11,6 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="24dp"
+        android:background="#40000000"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Enter any notes here..."
@@ -18,7 +19,8 @@
         app:layout_constraintBottom_toTopOf="@+id/save_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333" />
 
     <Button
         android:id="@+id/save_button"
