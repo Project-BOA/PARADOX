@@ -1,6 +1,6 @@
 <resources>
     <!-- Welcome -->
-    <string name="app_name">PARADOX</string>
+    <string name="app_name">PARAD0X</string>
     <string name="edit_text_puzzle_id">Room ID</string>
     <string name="button_puzzle_code">Join Room</string>
 
