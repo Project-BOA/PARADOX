@@ -45,16 +45,37 @@ class HomeFragment : Fragment() {
         binding.cameraButton.setOnClickListener{
             navController.navigate(R.id.navigate_home_to_camera)
         }
+        binding.cameraText.setOnClickListener{
+            navController.navigate(R.id.navigate_home_to_camera)
+        }
+
+
         binding.cipherButton.setOnClickListener{
             navController.navigate(R.id.navigate_home_to_cipher)
         }
+        binding.cipherText.setOnClickListener{
+            navController.navigate(R.id.navigate_home_to_cipher)
+        }
+
         binding.converterButton.setOnClickListener{
             navController.navigate(R.id.navigate_home_to_converter)
         }
+        binding.converterText.setOnClickListener{
+            navController.navigate(R.id.navigate_home_to_converter)
+        }
+
+
         binding.morseButton.setOnClickListener {
             navController.navigate(R.id.navigate_home_to_morse)
         }
+        binding.morseText.setOnClickListener {
+            navController.navigate(R.id.navigate_home_to_morse)
+        }
+
         binding.notesButton.setOnClickListener {
+            navController.navigate(R.id.navigate_home_to_notes)
+        }        
+        binding.notesText.setOnClickListener {
             navController.navigate(R.id.navigate_home_to_notes)
         }
         binding.submitButton.setOnClickListener {

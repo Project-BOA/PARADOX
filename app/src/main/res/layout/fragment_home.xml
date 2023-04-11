@@ -31,8 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:foreground="@drawable/ic_morse_button"
-
+                    android:foreground="@drawable/morse"
                     android:gravity="bottom|center"
                     android:insetLeft="6dp"
                     android:insetTop="6dp"
@@ -41,7 +40,7 @@
                     android:textColor="#5E35B1" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/morse_text"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_weight="1"
@@ -60,13 +59,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:foreground="@drawable/morse"
+                    android:foreground="@drawable/caesar_cipher"
                     android:gravity="bottom|center"
 
                     android:textColor="#5E35B1" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/cipher_text"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_weight="1"
@@ -92,11 +91,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:foreground="@drawable/ic_morse_button"
+                    android:foreground="@drawable/rich_text_converter"
                     android:textColor="#5E35B1" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/converter_text"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_weight="1"
@@ -116,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:foreground="@drawable/ic_morse_button"
+                    android:foreground="@drawable/qr_code_scan_icon"
                     android:insetLeft="6dp"
                     android:insetTop="6dp"
                     android:insetRight="6dp"
@@ -125,7 +124,7 @@
                     android:textColor="#5E35B1" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/camera_text"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_weight="1"
@@ -145,7 +144,7 @@
                 android:id="@+id/notes_button"
                 android:layout_width="180dp"
                 android:layout_height="157dp"
-                android:foreground="@drawable/ic_morse_button"
+                android:foreground="@drawable/writing"
 
                 android:textColor="#5E35B1"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -154,7 +153,7 @@
                 tools:layout_editor_absoluteY="-6dp" />
 
             <TextView
-                android:id="@+id/notesText"
+                android:id="@+id/notes_text"
                 android:layout_width="406dp"
                 android:layout_height="41dp"
                 android:layout_marginEnd="4dp"
