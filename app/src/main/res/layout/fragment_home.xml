@@ -7,12 +7,86 @@
     tools:context=".ui.home.HomeFragment">
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="800dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/converter_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:foreground="@drawable/converter_tool"
+                    android:insetLeft="6dp"
+                    android:insetTop="6dp"
+                    android:insetRight="6dp"
+                    android:insetBottom="6dp"
+                    android:textColor="#5E35B1" />
+
+                <TextView
+                    android:id="@+id/converter_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginHorizontal="6dp"
+                    android:layout_weight="1"
+
+                    android:background="@color/green_200"
+                    android:gravity="center"
+                    android:text="Converter"
+                    android:textColor="#673AB7"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/camera_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:foreground="@drawable/qr_scanner_tool"
+                    android:insetLeft="6dp"
+                    android:insetTop="6dp"
+                    android:insetRight="6dp"
+                    android:insetBottom="6dp"
+
+                    android:textColor="#5E35B1" />
+
+                <TextView
+                    android:id="@+id/camera_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginHorizontal="6dp"
+                    android:layout_weight="1"
+
+                    android:background="@color/green_200"
+                    android:gravity="center"
+                    android:text="Camera"
+                    android:textColor="#673AB7"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </TableRow>
 
         <TableRow
             android:layout_width="fill_parent"
@@ -31,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:foreground="@drawable/morse"
+                    android:foreground="@drawable/morse_tool"
                     android:gravity="bottom|center"
                     android:insetLeft="6dp"
                     android:insetTop="6dp"
@@ -43,9 +117,14 @@
                     android:id="@+id/morse_text"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
+                    android:layout_marginHorizontal="6dp"
                     android:layout_weight="1"
+                    android:background="@color/green_200"
                     android:gravity="center"
-                    android:text="Morse" />
+                    android:text="Morse"
+                    android:textColor="#673AB7"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -59,19 +138,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:foreground="@drawable/caesar_cipher"
+                    android:foreground="@drawable/cipher_tool"
                     android:gravity="bottom|center"
 
+                    android:insetLeft="6dp"
+                    android:insetTop="6dp"
+                    android:insetRight="6dp"
+                    android:insetBottom="6dp"
                     android:textColor="#5E35B1" />
 
                 <TextView
                     android:id="@+id/cipher_text"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
+                    android:layout_marginHorizontal="6dp"
                     android:layout_weight="1"
-                    android:gravity="center"
 
-                    android:text="Cipher" />
+                    android:background="@color/green_200"
+                    android:gravity="center"
+                    android:text="Cipher"
+                    android:textColor="#673AB7"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </TableRow>
 
@@ -81,28 +169,10 @@
             android:layout_weight="1">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/converter_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/rich_text_converter"
-                    android:textColor="#5E35B1" />
-
-                <TextView
-                    android:id="@+id/converter_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-
-                    android:text="Converter" />
-            </LinearLayout>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:orientation="vertical" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -111,73 +181,55 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/camera_button"
+                    android:id="@+id/notes_button"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:foreground="@drawable/qr_code_scan_icon"
+
+                    android:foreground="@drawable/notes_tool"
                     android:insetLeft="6dp"
                     android:insetTop="6dp"
                     android:insetRight="6dp"
                     android:insetBottom="6dp"
-
                     android:textColor="#5E35B1" />
 
                 <TextView
-                    android:id="@+id/camera_text"
+                    android:id="@+id/notes_text"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
+                    android:layout_marginHorizontal="6dp"
                     android:layout_weight="1"
-                    android:gravity="center"
 
-                    android:text="Camera" />
+                    android:background="@color/green_200"
+                    android:gravity="center"
+                    android:text="Notes"
+                    android:textColor="#673AB7"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight=".5"
+                android:orientation="vertical">
+
             </LinearLayout>
 
         </TableRow>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <Button
-                android:id="@+id/notes_button"
-                android:layout_width="180dp"
-                android:layout_height="157dp"
-                android:foreground="@drawable/writing"
-
-                android:textColor="#5E35B1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="-6dp" />
-
-            <TextView
-                android:id="@+id/notes_text"
-                android:layout_width="406dp"
-                android:layout_height="41dp"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="1"
-
-                android:gravity="center"
-                android:text="Notes"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:layout_editor_absoluteY="163dp" />
-
-            <Button
-                android:id="@+id/submit_button"
-                android:backgroundTint="@color/purple_700"
-                android:layout_width="318dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="36dp"
-                android:text="Submit Answer"
-                android:textColor="#5E35B1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.494"
-                app:layout_constraintStart_toStartOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
     </TableLayout>
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="318dp"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/purple_700"
+        android:text="Submit Answer"
+        android:textColor="#FEFFFA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -68,10 +69,10 @@ class LoginFragment : Fragment() {
                         response: Response<ProfileResponse>
                     ) {
                         if (isAdded) {
-                            // Toast the response status
-                            Toast.makeText(activityContext, response.body()?.status ?: "Error", Toast.LENGTH_LONG).show()
 
                             if (response.isSuccessful) {
+                                // Toast the response status
+                                Toast.makeText(activityContext, response.body()?.status ?: "Error", Toast.LENGTH_LONG).show()
                                 profileData.login(activityContext, Profile(
                                     usernameInput,
                                     passwordInput,
@@ -84,8 +85,18 @@ class LoginFragment : Fragment() {
                                 Log.d("login: $userLoginProfile", response.body().toString())
 
                             } else {
+                                try {
+                                    val jObjError = JSONObject(response.errorBody()!!.string())
+                                    Toast.makeText(
+                                        context,
+                                        jObjError.getString("status"),
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                } catch (e: Exception) {
+                                    Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
+                                }
                                 binding.buttonLogin.isClickable = true
-                                Log.e("login: $userLoginProfile", response.body().toString())
+                                Log.e("login: $userLoginProfile", response.errorBody().toString())
                             }
                             binding.loadingLogin.isVisible = false
                         }
