@@ -6,25 +6,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import team.boa.paradox.R
 import team.boa.paradox.databinding.FragmentProfileBinding
-import team.boa.paradox.network.ApiClient
-import team.boa.paradox.network.Profile
-import team.boa.paradox.network.ProfileResponse
 import team.boa.paradox.viewmodel.ProfileViewModel
+import team.boa.paradox.viewmodel.RoomViewModel
 
 
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
     private val profileData: ProfileViewModel by activityViewModels()
+    private val roomData: RoomViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +34,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupLinkButton()
+
         // launch login view if not already logged in
         if (profileData.isLoggedIn.value == false) {
             Navigation.findNavController(requireView()).navigate(R.id.navigate_profile_to_login)
@@ -46,49 +42,27 @@ class ProfileFragment : Fragment() {
 
         binding.textProfileUsername.text = profileData.getProfile()?.username
         binding.textProfileBiography.text = profileData.getProfile()?.biography
-        val userLogoutProfile = Profile (
-            profileData.getProfile()?.username.toString(),
-            profileData.getProfile()?.password.toString(),
-            null,
-            null,
-        null
-        )
 
 
         binding.buttonEdit.setOnClickListener {
             Navigation.findNavController(binding.root).navigate(R.id.navigate_profile_to_edit)
         }
+
         binding.buttonLogout.setOnClickListener {
-            ApiClient.profileAPIService.logout(userLogoutProfile).enqueue (
-                object : Callback<ProfileResponse> {
-
-                    override fun onResponse(
-                        call: Call<ProfileResponse>,
-                        response: Response<ProfileResponse>
-                    ) {
-
-                    }
-
-                    override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                        TODO("Not yet implemented")
-                    }
-
-                }
-            )
             profileData.logout(view.context)
+            roomData.leave(view.context)
             Navigation.findNavController(requireView()).navigate(R.id.navigate_profile_to_login)
         }
     }
 
     fun setupLinkButton() {
-        val linkButton = view?.findViewById<TextView>(R.id.link_to_site)
-        linkButton?.setOnClickListener {
+        binding.linkToSite.paint?.isUnderlineText = true;
+        binding.linkToSite.setOnClickListener {
             val browserIntent = Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://paradox-c8zo3cj6e-team-boa.vercel.app/login")
+                Uri.parse("https://paradox-kappa.vercel.app/")
             )
             startActivity(browserIntent)
         }
-
     }
 }

@@ -67,6 +67,10 @@ class MorseToolFragment : Fragment() {
                 else
                     sb.append(' ')
             }
+            if (sb.toString().trim().length == 0) {
+                binding.outText.text = "Invalid Morse"
+                return@setOnClickListener
+            }
             binding.outText.text = sb.toString()
         }
     }

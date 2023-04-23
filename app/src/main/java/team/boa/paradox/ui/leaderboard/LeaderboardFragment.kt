@@ -76,12 +76,8 @@ class LeaderboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(requireView())
 
-        // check user is in room before showing
-        binding.recyclerViewLeaderboard.isVisible = false
-
         // show if user is in room
         if (toolData.isInRoom.value == true) {
-            binding.textBrandLeaderboard.isVisible = true
             binding.recyclerViewLeaderboard.isVisible = true
             displayLeaderboard(toolData.getRoom()!!)
         } else {

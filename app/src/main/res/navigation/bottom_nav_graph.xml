@@ -117,9 +117,15 @@
         tools:layout="@layout/fragment_notes_tool" />
     <fragment
         android:id="@+id/puzzleCompleteFragment"
-        android:name="team.boa.paradox.ui.home.PuzzleCompleteFragment"
+        android:name="team.boa.paradox.ui.home.AnswerCorrectFragment"
         android:label="fragment_puzzle_complete"
-        tools:layout="@layout/fragment_puzzle_complete" />
+        tools:layout="@layout/fragment_answer_correct" >
+        <action
+            android:id="@+id/complete_to_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/submitToolFragment2"
         android:name="team.boa.paradox.ui.tool.SubmitToolFragment"

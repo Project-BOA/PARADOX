@@ -6,19 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.RegisterFragment">
 
-    <TextView
-        android:id="@+id/text_profile4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="#5E35B1"
-        android:textSize="60sp"
-        android:textStyle="bold|italic"
+    <ImageView
+        android:id="@+id/logoWithTextWelcome7"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="16dp"
+        android:src="@mipmap/ic_banner_foreground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="8dp"
         android:autofillHints=""
         android:hint="@string/edit_text_username_hint"
@@ -37,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/logoWithTextWelcome7" />
 
     <EditText
         android:id="@+id/edit_text_register_password"
@@ -97,9 +91,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="88dp"
+        android:backgroundTint="@color/pink"
         android:text="@string/button_register"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textColor="@color/powder"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

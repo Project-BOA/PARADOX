@@ -6,19 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.tool.SubmitToolFragment">
 
-    <TextView
-        android:id="@+id/text_profile5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="#5E35B1"
-        android:textSize="60sp"
-        android:textStyle="bold|italic"
+    <ImageView
+        android:id="@+id/logoWithTextWelcome8"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="16dp"
+        android:src="@mipmap/ic_banner_foreground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,9 +20,10 @@
         android:id="@+id/submit_button"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="116dp"
+        android:backgroundTint="@color/pink"
         android:text="Submit"
-        android:textColor="#5E35B1"
+        android:textColor="@color/powder"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,25 +31,20 @@
 
     <EditText
         android:id="@+id/ans_code"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
-        android:hint="Enter your answer here"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/submit_button"
+        android:autofillHints=""
+        android:background="#40000000"
+        android:hint="Answer"
+        android:minHeight="48dp"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/teal_700"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/resultView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/ans_code"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_profile5"
-        app:layout_constraintVertical_bias="0.493" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

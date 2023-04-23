@@ -10,7 +10,7 @@
         android:id="@+id/note_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="24dp"
+        android:layout_margin="12dp"
         android:background="#40000000"
         android:ems="10"
         android:gravity="start|top"
@@ -24,13 +24,15 @@
 
     <Button
         android:id="@+id/save_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
         android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/pink"
         android:text="SAVE"
+        android:textColor="@color/powder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
 

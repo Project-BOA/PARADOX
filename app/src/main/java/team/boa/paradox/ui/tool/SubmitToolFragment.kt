@@ -53,6 +53,7 @@ class SubmitToolFragment : Fragment() {
             ) {
                 if (isAdded) {
                     val status = response.body()?.status ?: "Error"
+
                     // Toast the response status
                     Toast.makeText(
                         activityContext,
@@ -60,15 +61,10 @@ class SubmitToolFragment : Fragment() {
                         Toast.LENGTH_LONG
                     ).show()
 
-                    if (status.contains("OK"))
-                        navController.navigate(R.id.navigate_submit_to_home)
+                    Log.i("submit", response.body().toString())
 
-//                    if (status.equals("OK - SINGLE"))
-//                        navController.navigate(R.id.navigate_submit_to_complete)
-//                    if (status.equals("OK - MULTI"))
-//                        navController.navigate(R.id.nav)
-//                    if (status.equals("OK - TIME"))
-//                        navController.navigate(R.id.nav)
+                    if (status.contains("OK"))
+                        navController.navigate(R.id.navigate_submit_to_complete)
                 }
             }
 
@@ -100,7 +96,6 @@ class SubmitToolFragment : Fragment() {
             }
 
             submitAnswer(answerInput, navController)
-
-        }
         }
     }
+}

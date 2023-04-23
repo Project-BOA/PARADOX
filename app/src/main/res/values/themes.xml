@@ -7,21 +7,29 @@
         <item name="colorOnPrimary">@color/darkgreen_200</item>
 
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/purple_500</item>
-        <item name="colorSecondaryVariant">@color/purple_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/blueViolet</item>
+        <item name="colorSecondaryVariant">@color/pink</item>
+        <item name="colorOnSecondary">@color/powder</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
 
+        <!-- Customize your theme here. -->
         <item name="windowNoTitle">false</item>
         <item name="windowActionBar">true</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
 
-<!--        <item name="android:background">@color/darkgreen_200</item>-->
 
+        <item name="android:actionBarStyle">@style/Theme.PARADOX.ActionBarStyle</item>
+    </style>
 
+    <style name="Theme.PARADOX.ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:titleTextStyle">@style/Theme.PARADOX.ActionBar.TitleTextStyle</item>
+    </style>
+
+    <style name="Theme.PARADOX.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/blueViolet</item>
     </style>
 
     <style name="Theme.PARADOX.NoActionBar">
@@ -30,10 +38,5 @@
     </style>
 
     <style name="Theme.PARADOX.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="Theme.PARADOX.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-
-
-
 </resources>

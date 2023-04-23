@@ -3,9 +3,8 @@ package team.boa.paradox
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
 import androidx.lifecycle.ViewModelProvider
@@ -64,7 +63,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // set background
-        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.darkgreen_200));
+        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.darkGreen));
+
+        // set actionbar background
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.lightGreen)))
 
         // add navigation
         val navView: BottomNavigationView = binding.navView
