@@ -47,10 +47,9 @@ data class ProfileResponse (
 
     @Json(name = "biography")
     val biography: String?,
+
     @Json(name = "newPassword")
     val newPassword: String?
-
-
 )
 
 /**

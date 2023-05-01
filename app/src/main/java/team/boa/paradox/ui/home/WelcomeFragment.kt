@@ -76,7 +76,7 @@ class WelcomeFragment : Fragment() {
                             "Puzzle does not exist or could not be located",
                             Toast.LENGTH_SHORT
                         ).show()
-                        Log.d("joinRoom: $userRoom", response.errorBody().toString())
+                        Log.d("joinRoom: $userRoom", response.errorBody()!!.string())
                     }
                 }
             }

@@ -78,7 +78,7 @@ class LoginFragment : Fragment() {
                                     passwordInput,
                                     response.body()?.email ?: "No Email",
                                     response.body()?.biography ?: "No Biography",
-                                    response.body()?.newPassword ?: "No NewPassword"
+                                    null
                                 ))
                                 Navigation.findNavController(binding.root)
                                     .navigate(R.id.navigate_login_to_profile)
@@ -96,7 +96,7 @@ class LoginFragment : Fragment() {
                                     Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
                                 }
                                 binding.buttonLogin.isClickable = true
-                                Log.e("login: $userLoginProfile", response.errorBody().toString())
+                                Log.e("login: $userLoginProfile", response.errorBody()!!.string())
                             }
                             binding.loadingLogin.isVisible = false
                         }

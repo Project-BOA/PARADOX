@@ -41,55 +41,69 @@ class EditFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         if (profileData.isLoggedIn.value == false) {
             Navigation.findNavController(requireView()).navigate(R.id.navigate_profile_to_login)
         }
+
+        // getting data from profile view model
+        binding.textProfileUsernameEdit.text = profileData.getProfile()?.username
+//        binding.editTextEditBiography.text = profileData.getProfile()?.biography
+
         binding.buttonSubmitEdit.setOnClickListener {
 
             binding.loadingEdit.isVisible = true
             binding.buttonSubmitEdit.isClickable = false
 
-            val usernameInput = profileData.getProfile()?.username.toString()
-            val passwordInput =  binding.editTextEditPassword.text?.trim().toString()
-            val newpasswordInput =  binding.editTextEditNewPassword.text?.trim().toString()
+            // username from profile viewmodel
+            val username = profileData.getProfile()?.username.toString()
+
+            // User can change email, biography and password
+            val email =  binding.editTextEditEmail.text?.trim().toString()
             val biography =  binding.editTextEditBiography.text?.trim().toString()
+            val newpasswordInput =  binding.editTextEditNewPassword.text?.trim().toString()
 
-            if (usernameInput.isNotEmpty() && passwordInput.isNotEmpty()&& newpasswordInput.isNotEmpty() && biography.isNotEmpty()) {
-                val userEdit = Profile(usernameInput, passwordInput, null, biography,newpasswordInput)
+            // User needs to confirm their password before editing
+            val confirmPassword =  binding.editTextEditPassword.text?.trim().toString()
 
-                ApiClient.profileAPIService.edit(userEdit)
-                    .enqueue( object : Callback<ProfileResponse> {
+            // check that confirmation password given and at least other input given
+            if (confirmPassword != "null" && (username != "null" || biography != "null"|| newpasswordInput != "null")) {
+                val editedProfile = Profile(username, confirmPassword, email, biography, newpasswordInput)
 
-                        override fun onResponse (
-                            call: Call<ProfileResponse>,
-                            response: Response<ProfileResponse>
-                        ) {
-                            if (isAdded) {
-                                // Toast the response status
-                                Toast.makeText(
-                                    activityContext,
-                                    response.body()?.status ?: "Error",
-                                    Toast.LENGTH_LONG
-                                ).show()
+                ApiClient.profileAPIService.edit(editedProfile).enqueue (
+                object : Callback<ProfileResponse> {
 
-                                if (response.isSuccessful) {
-                                    Navigation.findNavController(requireView())
-                                        .navigate(R.id.profile_edit_to_profile)
-                                    Log.d("Edit: $userEdit", response.body().toString())
-                                } else {
-                                    binding.buttonSubmitEdit.isClickable = true
-                                    Log.e("Edit: $userEdit", response.raw().toString())
-                                }
-                                binding.loadingEdit.isVisible = false
+                    override fun onResponse (
+                        call: Call<ProfileResponse>,
+                        response: Response<ProfileResponse>
+                    ) {
+                        if (isAdded) {
+
+                            // Toast the response status
+                            Toast.makeText(
+                                activityContext,
+                                response.body()?.status ?: "Error",
+                                Toast.LENGTH_LONG
+                            ).show()
+
+                            if (response.isSuccessful) {
+                                Navigation.findNavController(requireView())
+                                    .navigate(R.id.profile_edit_to_profile)
+                                Log.d("Edit: $editedProfile", response.body().toString())
+                            } else {
+                                binding.buttonSubmitEdit.isClickable = true
+                                Log.e("Edit: $editedProfile", response.errorBody()!!.string())
                             }
+                            binding.loadingEdit.isVisible = false
                         }
+                    }
 
-                        override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                            if (isAdded) {
-                                Log.e("Edit: $userEdit", "" + t.message)
-                            }
+                    override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+                        if (isAdded) {
+                            Log.e("Edit: $editedProfile", "" + t.message)
                         }
-                    })
+                    }
+                })
             } else {
                 Toast.makeText(activityContext, "Input required", Toast.LENGTH_LONG).show()
                 binding.buttonSubmitEdit.isClickable = true
