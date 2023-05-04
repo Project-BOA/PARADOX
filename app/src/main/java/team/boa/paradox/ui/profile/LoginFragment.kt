@@ -93,7 +93,7 @@ class LoginFragment : Fragment() {
                                         Toast.LENGTH_LONG
                                     ).show()
                                 } catch (e: Exception) {
-                                    Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
+                                    Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
                                 }
                                 binding.buttonLogin.isClickable = true
                                 Log.e("login: $userLoginProfile", response.errorBody()!!.string())

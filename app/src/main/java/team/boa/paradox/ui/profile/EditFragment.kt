@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -69,7 +70,7 @@ class EditFragment : Fragment() {
             // check that confirmation password given and at least other input given
             if (confirmPassword != "null" && (username != "null" || biography != "null"|| newpasswordInput != "null")) {
                 val editedProfile = Profile(username, confirmPassword, email, biography, newpasswordInput)
-
+                Log.d("Edit", editedProfile.toString())
                 ApiClient.profileAPIService.edit(editedProfile).enqueue (
                 object : Callback<ProfileResponse> {
 
@@ -78,19 +79,20 @@ class EditFragment : Fragment() {
                         response: Response<ProfileResponse>
                     ) {
                         if (isAdded) {
-
-                            // Toast the response status
-                            Toast.makeText(
-                                activityContext,
-                                response.body()?.status ?: "Error",
-                                Toast.LENGTH_LONG
-                            ).show()
-
                             if (response.isSuccessful) {
                                 Navigation.findNavController(requireView())
                                     .navigate(R.id.profile_edit_to_profile)
-                                Log.d("Edit: $editedProfile", response.body().toString())
                             } else {
+                                try {
+                                    val jObjError = JSONObject(response.errorBody()!!.string())
+                                    Toast.makeText(
+                                        context,
+                                        jObjError.getString("status"),
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                } catch (e: Exception) {
+                                    Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+                                }
                                 binding.buttonSubmitEdit.isClickable = true
                                 Log.e("Edit: $editedProfile", response.errorBody()!!.string())
                             }

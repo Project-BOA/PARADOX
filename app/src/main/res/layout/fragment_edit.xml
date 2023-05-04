@@ -23,17 +23,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="56dp"
         android:autofillHints=""
         android:hint="Confirm password"
-        android:inputType="text"
+        android:inputType="text|textPassword"
         android:textAlignment="center"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_submit_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_edit_new_password" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_edit_new_password"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/edit_text_edit_new_password"
@@ -61,7 +63,7 @@
         android:layout_marginEnd="8dp"
         android:hint="Email"
         android:importantForAutofill="no"
-        android:inputType="textPassword"
+        android:inputType="textWebEmailAddress"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

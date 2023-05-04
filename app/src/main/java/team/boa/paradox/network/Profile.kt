@@ -12,6 +12,7 @@ import retrofit2.http.POST
  * @property username the users username
  * @property password the users password
  * @property biography the users biography NOTE: Only necessary on registering
+ * @property biography the users new password NOTE: Only necessary on editing
  */
 data class Profile (
 
