@@ -1,8 +1,8 @@
-# Prototype-1
+# PARAD0X
 
-## Design
-
-![App wireframe](images/PrototypeDesign.jpg)
+<p align="center">
+  <img alt= "Paradox Logo" width="128" height="128" src="images/penrose-triangle-coloured-circled-512.png">
+<p>
 
 ## Sources
 
